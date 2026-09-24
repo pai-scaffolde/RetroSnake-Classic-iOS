@@ -1,0 +1,6 @@
+web/node_modules/
+web/dist/
+ios/RetroSnakeClassic/GameAssets/
+ios/*.xcworkspace/xcuserdata/
+ios/*.xcodeproj/xcuserdata/
+.DS_Store

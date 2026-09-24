@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="ground" x2="0" y2="1"><stop stop-color="#456626"/><stop offset="1" stop-color="#152b0d"/></linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="36"/></filter>
+    <g id="cube">
+      <path d="M0 25 64 0 128 25 64 50Z" fill="#d7fa82"/>
+      <path d="M0 25 64 50 64 115 0 90Z" fill="#83b440"/>
+      <path d="M128 25 64 50 64 115 128 90Z" fill="#b6e65f"/>
+      <path d="M0 25 64 50 128 25M64 50v65" fill="none" stroke="#35531e" stroke-width="7"/>
+    </g>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#ground)"/>
+  <path d="M50 50h924v924H50z" fill="none" stroke="#719544" stroke-width="12"/>
+  <path d="M96 866h832M96 738h832M96 610h832M96 482h832M96 354h832M96 226h832M192 96v832M320 96v832M448 96v832M576 96v832M704 96v832M832 96v832" stroke="#84ab4b" stroke-opacity=".17" stroke-width="7"/>
+  <ellipse cx="522" cy="548" rx="350" ry="375" fill="#b8ec6c" opacity=".3" filter="url(#glow)"/>
+  <g transform="translate(243 155)">
+    <use xlink:href="#cube" x="0" y="0"/>
+    <use xlink:href="#cube" x="128" y="0"/>
+    <use xlink:href="#cube" x="256" y="0"/>
+    <use xlink:href="#cube" x="256" y="128"/>
+    <use xlink:href="#cube" x="256" y="256"/>
+    <use xlink:href="#cube" x="128" y="256"/>
+    <use xlink:href="#cube" x="0" y="256"/>
+    <use xlink:href="#cube" x="0" y="384"/>
+    <use xlink:href="#cube" x="0" y="512"/>
+    <use xlink:href="#cube" x="128" y="512"/>
+    <use xlink:href="#cube" x="256" y="512"/>
+    <circle cx="340" cy="32" r="13" fill="#1a3010"/>
+    <circle cx="379" cy="32" r="13" fill="#1a3010"/>
+  </g>
+</svg>

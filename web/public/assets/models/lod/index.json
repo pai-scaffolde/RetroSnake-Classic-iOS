@@ -1,0 +1,134 @@
+{
+ "SM_Island": {
+  "L1": {
+   "path": "assets/models/lod/SM_Island_L1.glb",
+   "triangles": 89996,
+   "bytes": 1575804
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_Island_L2.glb",
+   "triangles": 36826,
+   "bytes": 758384
+  }
+ },
+ "SM_Ruin_A": {
+  "L1": {
+   "path": "assets/models/lod/SM_Ruin_A_L1.glb",
+   "triangles": 8998,
+   "bytes": 207404
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_Ruin_A_L2.glb",
+   "triangles": 6766,
+   "bytes": 167852
+  }
+ },
+ "SM_Ruin_B": {
+  "L1": {
+   "path": "assets/models/lod/SM_Ruin_B_L1.glb",
+   "triangles": 9000,
+   "bytes": 193828
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_Ruin_B_L2.glb",
+   "triangles": 6024,
+   "bytes": 140528
+  }
+ },
+ "SM_Ruin_C": {
+  "L1": {
+   "path": "assets/models/lod/SM_Ruin_C_L1.glb",
+   "triangles": 10493,
+   "bytes": 268844
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_Ruin_C_L2.glb",
+   "triangles": 10401,
+   "bytes": 267156
+  }
+ },
+ "SM_BoardKerb": {
+  "L1": {
+   "path": "assets/models/lod/SM_BoardKerb_L1.glb",
+   "triangles": 1600,
+   "bytes": 29156
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_BoardKerb_L2.glb",
+   "triangles": 500,
+   "bytes": 12608
+  }
+ },
+ "SM_FloatingRock_A": {
+  "L1": {
+   "path": "assets/models/lod/SM_FloatingRock_A_L1.glb",
+   "triangles": 5998,
+   "bytes": 139236
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_FloatingRock_A_L2.glb",
+   "triangles": 3464,
+   "bytes": 93032
+  }
+ },
+ "SM_FloatingRock_B": {
+  "L1": {
+   "path": "assets/models/lod/SM_FloatingRock_B_L1.glb",
+   "triangles": 8998,
+   "bytes": 209024
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_FloatingRock_B_L2.glb",
+   "triangles": 6198,
+   "bytes": 163140
+  }
+ },
+ "SM_FloatingRock_C": {
+  "L1": {
+   "path": "assets/models/lod/SM_FloatingRock_C_L1.glb",
+   "triangles": 12376,
+   "bytes": 289644
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_FloatingRock_C_L2.glb",
+   "triangles": 10648,
+   "bytes": 271832
+  }
+ },
+ "SM_Critter": {
+  "L1": {
+   "path": "assets/models/lod/SM_Critter_L1.glb",
+   "triangles": 9998,
+   "bytes": 163008
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_Critter_L2.glb",
+   "triangles": 3498,
+   "bytes": 80404
+  }
+ },
+ "SM_SnakeHead": {
+  "L1": {
+   "path": "assets/models/lod/SM_SnakeHead_L1.glb",
+   "triangles": 13998,
+   "bytes": 173700
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_SnakeHead_L2.glb",
+   "triangles": 6100,
+   "bytes": 87952
+  }
+ },
+ "SM_NeonBlock": {
+  "L1": {
+   "path": "assets/models/lod/SM_NeonBlock_L1.glb",
+   "triangles": 2998,
+   "bytes": 30676
+  },
+  "L2": {
+   "path": "assets/models/lod/SM_NeonBlock_L2.glb",
+   "triangles": 1198,
+   "bytes": 16260
+  }
+ }
+}

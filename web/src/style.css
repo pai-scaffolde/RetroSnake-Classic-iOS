@@ -1,0 +1,134 @@
+:root {
+  --lcd: #b8d98a;
+  --lcd-ink: #1d2b12;
+  --ink: #0b0f0a;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--ink);
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app,
+#view {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  font-family: Inter, system-ui, sans-serif;
+  color: #fff;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+#hud [data-ui] {
+  pointer-events: auto;
+}
+
+#loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: radial-gradient(ellipse at center, #1a2412 0%, var(--ink) 70%);
+  color: var(--lcd);
+  font-family: 'RetroSnake LCD', ui-monospace, monospace;
+  letter-spacing: 0.2em;
+  transition: opacity 0.7s ease;
+  z-index: 10;
+}
+
+#loader .logo {
+  font-size: clamp(28px, 7vw, 64px);
+  text-shadow: 0 0 18px rgba(184, 217, 138, 0.55);
+}
+
+#loader .bar {
+  width: min(320px, 60vw);
+  height: 6px;
+  background: rgba(184, 217, 138, 0.15);
+}
+
+#loader .bar > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--lcd);
+  box-shadow: 0 0 10px var(--lcd);
+  transition: width 0.2s ease;
+}
+
+#loader .status {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+#loader .credit {
+  position: absolute;
+  bottom: calc(22px + env(safe-area-inset-bottom));
+  font: 600 11px Inter, system-ui, sans-serif;
+  letter-spacing: 0.18em;
+  color: rgba(184, 217, 138, 0.55);
+  text-decoration: none;
+}
+
+#loader .credit:hover {
+  color: var(--lcd);
+}
+
+#loader.ready {
+  cursor: pointer;
+}
+
+#loader.ready .status {
+  animation: blink 1s steps(2, start) infinite;
+}
+
+#loader.ready .bar {
+  opacity: 0;
+}
+
+#loader.gone {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.fps {
+  position: fixed;
+  left: 8px;
+  top: 8px;
+  z-index: 5;
+  font: 12px ui-monospace, monospace;
+  color: #9f9;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2px 6px;
+  pointer-events: none;
+}

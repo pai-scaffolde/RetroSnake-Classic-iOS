@@ -1,0 +1,4810 @@
+{
+ "version": 1,
+ "generator": "Tools/web/export_assets.py",
+ "conventions": {
+  "axes": "glTF: +Y up, right-handed, metres. web (x, y, z) = (UE X, UE Z, UE Y) x scale = (Blender X, Blender Z, -Blender Y) x scale.",
+  "scale": {
+   "arena": "real scale: 1 UU = 0.01 m, one board cell (200 UU) = 2 m",
+   "desk": "real-world size: 1 UU = 0.0001 m (the UE desk level is 100x real scale; the web build is not). Phone = 0.113 m long."
+  },
+  "uuToMetres": {
+   "arena": 0.01,
+   "desk": 0.0001
+  },
+  "phoneFrame": "Phone parts + keys share one pivot = LCD surface centre. Phone top -> +X, screen faces +Y, player's right -> +Z.",
+  "models": "One mesh node per GLB (name = asset name) with identity transform: POSITION is float32, so mesh.geometry can be used directly (InstancedMesh etc.) and the pivot is the documented one. One primitive per material slot; material names = slot names (GLB material parameters are placeholders). EXT_meshopt_compression + KHR_mesh_quantization: register MeshoptDecoder on GLTFLoader. No tangents: use normalScale (1, -1) with the OpenGL normal maps (three derives tangents from UVs, exactly what GLTFLoader does for tangent-less glTF). COLOR_0 are linear MASKS, not tint colours (see colorAttributes/notes); do not enable vertexColors blindly.",
+  "textures": "WebP. UVs follow glTF (v=0 at the top of the image): set texture.flipY = false. colorSpace srgb -> SRGBColorSpace, linear -> NoColorSpace. Normal maps are OpenGL convention. Tileable sets need RepeatWrapping.",
+  "audio": "MP3 (LAME, Xing/LAME gapless header). duration/sampleRate/frames are the exact WAV source values. For loops set loopStart/loopEnd from the manifest; if the decoded AudioBuffer is longer than duration by about mp3PrimingSeconds (decoder did not trim encoder delay), offset both by mp3PrimingSeconds.",
+  "paths": "Relative to the site base (no leading slash)."
+ },
+ "models": {
+  "SM_CDCase": {
+   "path": "assets/models/SM_CDCase.glb",
+   "bytes": 24696,
+   "bounds": {
+    "min": [
+     -0.071,
+     0,
+     -0.0625
+    ],
+    "max": [
+     0.071,
+     0.01,
+     0.0625
+    ]
+   },
+   "size": [
+    0.142,
+    0.01,
+    0.125
+   ],
+   "materials": [
+    "MI_CDCase_Tray",
+    "MI_CDCase_Clear",
+    "MI_CDArt_A"
+   ],
+   "ueMaterials": {
+    "MI_CDCase_Tray": "MI_CDCase_Tray",
+    "MI_CDCase_Clear": "MI_CDCase_Clear",
+    "MI_CDArt_A": "MI_CDArt_A/B/C (per instance)"
+   },
+   "scene": "desk",
+   "triangles": 1236,
+   "vertices": 1206,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre, resting on Z=0",
+   "notes": "Lies flat, front up, hinge on -X. MI_CDArt_A slot = 12x12 cm booklet under the clear lid, UV 0-1 (U -> +X, V -> +Y = art 'up'). Swap MI_CDArt_A/B/C per instance.",
+   "source": "Art/Export/SM_CDCase.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -710.0,
+     -625.0,
+     -0.0
+    ],
+    "max": [
+     710.0,
+     625.0,
+     100.0
+    ],
+    "size": [
+     1420.0,
+     1250.0,
+     100.0
+    ]
+   },
+   "rawBytes": 49192
+  },
+  "SM_CDPlayer": {
+   "path": "assets/models/SM_CDPlayer.glb",
+   "bytes": 129908,
+   "bounds": {
+    "min": [
+     -0.073,
+     0,
+     -0.07
+    ],
+    "max": [
+     0.107642,
+     0.02975,
+     0.0714
+    ]
+   },
+   "size": [
+    0.180642,
+    0.02975,
+    0.1414
+   ],
+   "materials": [
+    "MI_CDPlayer_Body",
+    "MI_CDPlayer_Window",
+    "MI_CD_Disc",
+    "MI_CDPlayer_LCD",
+    "MI_Prop_RubberBlack",
+    "MI_Prop_Chrome"
+   ],
+   "ueMaterials": {
+    "MI_CDPlayer_Body": "MI_CDPlayer_Body",
+    "MI_CDPlayer_Window": "MI_CDPlayer_Window",
+    "MI_CD_Disc": "MI_CD_Disc",
+    "MI_CDPlayer_LCD": "MI_CDPlayer_LCD",
+    "MI_Prop_RubberBlack": "MI_Prop_RubberBlack",
+    "MI_Prop_Chrome": "MI_Prop_Chrome"
+   },
+   "scene": "desk",
+   "triangles": 9288,
+   "vertices": 7353,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre of the player body (cable stub extends to +X)",
+   "notes": "Lid window centre at (0, 8, 290) UU; CD visible through smoked window. Buttons on the -Y edge, headphone cable on +X side.",
+   "source": "Art/Export/SM_CDPlayer.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -730.0,
+     -714.0,
+     0.0
+    ],
+    "max": [
+     1076.42,
+     700.0,
+     297.5
+    ],
+    "size": [
+     1806.42,
+     1414.0,
+     297.5
+    ]
+   },
+   "rawBytes": 297100
+  },
+  "SM_CRTMonitor": {
+   "path": "assets/models/SM_CRTMonitor.glb",
+   "bytes": 117540,
+   "bounds": {
+    "min": [
+     -0.2,
+     0,
+     -0.2
+    ],
+    "max": [
+     0.2,
+     0.415,
+     0.203
+    ]
+   },
+   "size": [
+    0.4,
+    0.415,
+    0.403
+   ],
+   "materials": [
+    "MI_CRT_Plastic",
+    "MI_CRTScreen",
+    "MI_CRT_LED"
+   ],
+   "ueMaterials": {
+    "MI_CRT_Plastic": "MI_CRT_Plastic",
+    "MI_CRTScreen": "MI_CRTScreen",
+    "MI_CRT_LED": "MI_CRT_LED"
+   },
+   "scene": "desk",
+   "triangles": 9848,
+   "vertices": 7160,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre, resting on Z=0",
+   "notes": "Front (screen) faces -Y in Blender. MI_CRTScreen: slightly convex glass, UV 0-1 over the visible 31.2 x 24.4 cm opening (U -> +X right, V -> +Z up), centre at (0, -2070, 2500) UU. Emissive in UE.",
+   "source": "Art/Export/SM_CRTMonitor.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -2000.0,
+     -2030.0,
+     0.0
+    ],
+    "max": [
+     2000.0,
+     2000.0,
+     4150.0
+    ],
+    "size": [
+     4000.0,
+     4030.0,
+     4150.0
+    ]
+   },
+   "rawBytes": 291620
+  },
+  "SM_Desk": {
+   "path": "assets/models/SM_Desk.glb",
+   "bytes": 47204,
+   "bounds": {
+    "min": [
+     -0.8,
+     0,
+     -0.4
+    ],
+    "max": [
+     0.8,
+     0.03,
+     0.4
+    ]
+   },
+   "size": [
+    1.6,
+    0.03,
+    0.8
+   ],
+   "materials": [
+    "MI_DeskWood"
+   ],
+   "ueMaterials": {
+    "MI_DeskWood": "MI_DeskWood"
+   },
+   "scene": "desk",
+   "triangles": 5720,
+   "vertices": 2862,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre, resting on Z=0",
+   "notes": "Desk top slab only. UV0: top planar, 1 UV = 80 cm (texture tiles 2x along X, 1x along Y), sides unfolded at the same scale.",
+   "source": "Art/Export/SM_Desk.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -8000.0,
+     -4000.0,
+     0.0
+    ],
+    "max": [
+     8000.0,
+     4000.0,
+     300.0
+    ],
+    "size": [
+     16000.0,
+     8000.0,
+     300.0
+    ]
+   },
+   "rawBytes": 127144
+  },
+  "SM_DeskLamp": {
+   "path": "assets/models/SM_DeskLamp.glb",
+   "bytes": 175168,
+   "bounds": {
+    "min": [
+     -0.108434,
+     0,
+     -0.075
+    ],
+    "max": [
+     0.23717,
+     0.438961,
+     0.075
+    ]
+   },
+   "size": [
+    0.345604,
+    0.438961,
+    0.15
+   ],
+   "materials": [
+    "MI_Lamp_Paint",
+    "MI_Prop_Chrome",
+    "MI_Lamp_ShadeInner",
+    "MI_LampBulb"
+   ],
+   "ueMaterials": {
+    "MI_Lamp_Paint": "MI_Lamp_Paint",
+    "MI_Prop_Chrome": "MI_Prop_Chrome",
+    "MI_Lamp_ShadeInner": "MI_Lamp_ShadeInner",
+    "MI_LampBulb": "MI_LampBulb"
+   },
+   "scene": "desk",
+   "triangles": 9268,
+   "vertices": 9516,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Centre of the round base on Z=0 (arms/head extend toward +X, so not the bbox centre)",
+   "notes": "Shade points toward +X, 60 deg below horizontal. Shade mouth centre at (1794, 0, 3339) UU; bulb centre at (1539, 0, 3780) UU (put the spot light here).",
+   "anchors": {
+    "bulbCenter": [
+     0.15389,
+     0.37804,
+     0.0
+    ],
+    "lightDirection": [
+     0.5,
+     -0.866,
+     0.0
+    ]
+   },
+   "source": "Art/Export/SM_DeskLamp.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -1084.34,
+     -750.0,
+     0.0
+    ],
+    "max": [
+     2371.7,
+     750.0,
+     4389.61
+    ],
+    "size": [
+     3456.04,
+     1500.0,
+     4389.61
+    ]
+   },
+   "rawBytes": 364364
+  },
+  "SM_GelPen": {
+   "path": "assets/models/SM_GelPen.glb",
+   "bytes": 31796,
+   "bounds": {
+    "min": [
+     -0.07,
+     -0.00015,
+     -0.00495
+    ],
+    "max": [
+     0.07,
+     0.0109,
+     0.00495
+    ]
+   },
+   "size": [
+    0.14,
+    0.01105,
+    0.0099
+   ],
+   "materials": [
+    "MI_GelPen_Barrel",
+    "MI_GelPen_Ink",
+    "MI_GelPen_Cap",
+    "MI_Prop_Chrome"
+   ],
+   "ueMaterials": {
+    "MI_GelPen_Barrel": "MI_GelPen_Barrel",
+    "MI_GelPen_Ink": "MI_GelPen_Ink",
+    "MI_GelPen_Cap": "MI_GelPen_Cap",
+    "MI_Prop_Chrome": "MI_Prop_Chrome"
+   },
+   "scene": "desk",
+   "triangles": 1536,
+   "vertices": 1370,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre, resting on Z=0",
+   "notes": "Lies along X (cap/tip toward +X), capped. Barrel and cap are translucent shells; ink tube inside uses MI_GelPen_Ink (glitter).",
+   "source": "Art/Export/SM_GelPen.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -700.0,
+     -49.5,
+     -1.5
+    ],
+    "max": [
+     700.0,
+     49.5,
+     109.0
+    ],
+    "size": [
+     1400.0,
+     99.0,
+     110.5
+    ]
+   },
+   "rawBytes": 57156
+  },
+  "SM_LCDPixel": {
+   "path": "assets/models/SM_LCDPixel.glb",
+   "bytes": 3668,
+   "bounds": {
+    "min": [
+     -5e-05,
+     0,
+     -5e-05
+    ],
+    "max": [
+     5e-05,
+     0.0001,
+     5e-05
+    ]
+   },
+   "size": [
+    0.0001,
+    0.0001,
+    0.0001
+   ],
+   "materials": [
+    "M_LCDPixel"
+   ],
+   "ueMaterials": {
+    "M_LCDPixel": "M_LCDPixel"
+   },
+   "scene": "desk",
+   "triangles": 92,
+   "vertices": 80,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Bottom centre (Z 0 -> 1 UU), 1x1x1 UU; C++ scales to 3.4x3.4x3 UU",
+   "notes": "Bevel 0.12 UU, 2 segments, weighted normals. Instanced 6080x.",
+   "source": "Art/Export/SM_LCDPixel.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -0.5,
+     -0.5,
+     0.0
+    ],
+    "max": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "size": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "rawBytes": 4376
+  },
+  "SM_Phone_Body": {
+   "path": "assets/models/SM_Phone_Body.glb",
+   "bytes": 69272,
+   "bounds": {
+    "min": [
+     -0.0815,
+     -0.0205,
+     -0.024
+    ],
+    "max": [
+     0.0315,
+     -0.0002,
+     0.024
+    ]
+   },
+   "size": [
+    0.113,
+    0.0203,
+    0.048
+   ],
+   "materials": [
+    "MI_Phone_Shell"
+   ],
+   "ueMaterials": {
+    "MI_Phone_Shell": "MI_Phone_Shell"
+   },
+   "scene": "desk",
+   "triangles": 7352,
+   "vertices": 4352,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "Same scale/orientation as faceplate, projected from the back. Deck/LCD recess floor flat at Z=-2 UU under the whole front (>= 410x290 UU). Antenna hump on back near top; power button on top edge (to X=+315 UU); charger port at bottom end.",
+   "source": "Art/Export/SM_Phone_Body.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -815.0,
+     -240.0,
+     -205.0
+    ],
+    "max": [
+     315.0,
+     240.0,
+     -2.0
+    ],
+    "size": [
+     1130.0,
+     480.0,
+     203.0
+    ]
+   },
+   "rawBytes": 184664
+  },
+  "SM_Phone_Faceplate": {
+   "path": "assets/models/SM_Phone_Faceplate.glb",
+   "bytes": 181036,
+   "bounds": {
+    "min": [
+     -0.0815,
+     -0.0085,
+     -0.024
+    ],
+    "max": [
+     0.0307,
+     0.0016,
+     0.024
+    ]
+   },
+   "size": [
+    0.1122,
+    0.0101,
+    0.048
+   ],
+   "materials": [
+    "MI_Faceplate"
+   ],
+   "ueMaterials": {
+    "MI_Faceplate": "MI_Faceplate_<Cover> (Navy/Flames/Camo/Ice, swapped at runtime)"
+   },
+   "scene": "desk",
+   "triangles": 20034,
+   "vertices": 14510,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "Front planar projection with side walls unfolded outward (low distortion). 1 UV unit = 1360 UU; v runs up the phone (+X), u toward the player's right. Whole faceplate fits in 0-1 (u ~0.25-0.75, v ~0.03-0.97); tileable textures can be scaled freely. Screen window 430 (Y) x 324 (X) UU with a soft chamfer; overlaps the bezel's outer edge (444 x 334) by ~7 UU/side so no seam shows. Key holes = key footprint + 4.5 UU clearance; Up/Down share one rocker hole.",
+   "source": "Art/Export/SM_Phone_Faceplate.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -815.0,
+     -240.0,
+     -85.0
+    ],
+    "max": [
+     307.0,
+     240.0,
+     16.0
+    ],
+    "size": [
+     1122.0,
+     480.0,
+     101.0
+    ]
+   },
+   "rawBytes": 585828
+  },
+  "SM_Phone_Key_0": {
+   "path": "assets/models/SM_Phone_Key_0.glb",
+   "bytes": 14768,
+   "bounds": {
+    "min": [
+     -0.0695,
+     0.0005,
+     -0.0055
+    ],
+    "max": [
+     -0.0625,
+     0.00285,
+     0.0055
+    ]
+   },
+   "size": [
+    0.007,
+    0.00235,
+    0.011
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 963,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "0",
+    "topCenter": [
+     -0.066,
+     0.00285,
+     -0.0
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 0.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     2,
+     2
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_0.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -695.0,
+     -55.0,
+     5.0
+    ],
+    "max": [
+     -625.0,
+     55.0,
+     28.5
+    ],
+    "size": [
+     70.0,
+     110.0,
+     23.5
+    ]
+   },
+   "rawBytes": 41724
+  },
+  "SM_Phone_Key_1": {
+   "path": "assets/models/SM_Phone_Key_1.glb",
+   "bytes": 14528,
+   "bounds": {
+    "min": [
+     -0.039194,
+     0.0005,
+     -0.019549
+    ],
+    "max": [
+     -0.031806,
+     0.00285,
+     -0.008451
+    ]
+   },
+   "size": [
+    0.007388,
+    0.00235,
+    0.011098
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1607,
+   "vertices": 958,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "1",
+    "topCenter": [
+     -0.0355,
+     0.00285,
+     -0.014
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": -4.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     0,
+     0
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_1.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -391.94,
+     84.51,
+     5.0
+    ],
+    "max": [
+     -318.06,
+     195.49,
+     28.5
+    ],
+    "size": [
+     73.88,
+     110.99,
+     23.5
+    ]
+   },
+   "rawBytes": 41572
+  },
+  "SM_Phone_Key_2": {
+   "path": "assets/models/SM_Phone_Key_2.glb",
+   "bytes": 14440,
+   "bounds": {
+    "min": [
+     -0.0395,
+     0.0005,
+     -0.0055
+    ],
+    "max": [
+     -0.0325,
+     0.00285,
+     0.0055
+    ]
+   },
+   "size": [
+    0.007,
+    0.00235,
+    0.011
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 963,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "2",
+    "topCenter": [
+     -0.036,
+     0.00285,
+     -0.0
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 0.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     1,
+     0
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_2.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -395.0,
+     -55.0,
+     5.0
+    ],
+    "max": [
+     -325.0,
+     55.0,
+     28.5
+    ],
+    "size": [
+     70.0,
+     110.0,
+     23.5
+    ]
+   },
+   "rawBytes": 41736
+  },
+  "SM_Phone_Key_3": {
+   "path": "assets/models/SM_Phone_Key_3.glb",
+   "bytes": 14716,
+   "bounds": {
+    "min": [
+     -0.039194,
+     0.0005,
+     0.008451
+    ],
+    "max": [
+     -0.031806,
+     0.00285,
+     0.019549
+    ]
+   },
+   "size": [
+    0.007388,
+    0.00235,
+    0.011098
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 961,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "3",
+    "topCenter": [
+     -0.0355,
+     0.00285,
+     0.014
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 4.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     2,
+     0
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_3.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -391.94,
+     -195.49,
+     5.0
+    ],
+    "max": [
+     -318.06,
+     -84.51,
+     28.5
+    ],
+    "size": [
+     73.88,
+     110.99,
+     23.5
+    ]
+   },
+   "rawBytes": 41672
+  },
+  "SM_Phone_Key_4": {
+   "path": "assets/models/SM_Phone_Key_4.glb",
+   "bytes": 14652,
+   "bounds": {
+    "min": [
+     -0.049194,
+     0.0005,
+     -0.019549
+    ],
+    "max": [
+     -0.041806,
+     0.00285,
+     -0.008451
+    ]
+   },
+   "size": [
+    0.007388,
+    0.00235,
+    0.011098
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1607,
+   "vertices": 959,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "4",
+    "topCenter": [
+     -0.0455,
+     0.00285,
+     -0.014
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": -4.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     3,
+     0
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_4.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -491.94,
+     84.51,
+     5.0
+    ],
+    "max": [
+     -418.06,
+     195.49,
+     28.5
+    ],
+    "size": [
+     73.88,
+     110.99,
+     23.5
+    ]
+   },
+   "rawBytes": 41604
+  },
+  "SM_Phone_Key_5": {
+   "path": "assets/models/SM_Phone_Key_5.glb",
+   "bytes": 14752,
+   "bounds": {
+    "min": [
+     -0.0495,
+     0.0005,
+     -0.0055
+    ],
+    "max": [
+     -0.0425,
+     0.00285,
+     0.0055
+    ]
+   },
+   "size": [
+    0.007,
+    0.00235,
+    0.011
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 963,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "5",
+    "topCenter": [
+     -0.046,
+     0.00285,
+     -0.0
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 0.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     0,
+     1
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_5.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -495.0,
+     -55.0,
+     5.0
+    ],
+    "max": [
+     -425.0,
+     55.0,
+     28.5
+    ],
+    "size": [
+     70.0,
+     110.0,
+     23.5
+    ]
+   },
+   "rawBytes": 41736
+  },
+  "SM_Phone_Key_6": {
+   "path": "assets/models/SM_Phone_Key_6.glb",
+   "bytes": 14852,
+   "bounds": {
+    "min": [
+     -0.049194,
+     0.0005,
+     0.008451
+    ],
+    "max": [
+     -0.041806,
+     0.00285,
+     0.019549
+    ]
+   },
+   "size": [
+    0.007388,
+    0.00235,
+    0.011098
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 961,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "6",
+    "topCenter": [
+     -0.0455,
+     0.00285,
+     0.014
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 4.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     1,
+     1
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_6.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -491.94,
+     -195.49,
+     5.0
+    ],
+    "max": [
+     -418.06,
+     -84.51,
+     28.5
+    ],
+    "size": [
+     73.88,
+     110.99,
+     23.5
+    ]
+   },
+   "rawBytes": 41672
+  },
+  "SM_Phone_Key_7": {
+   "path": "assets/models/SM_Phone_Key_7.glb",
+   "bytes": 14656,
+   "bounds": {
+    "min": [
+     -0.059194,
+     0.0005,
+     -0.019549
+    ],
+    "max": [
+     -0.051806,
+     0.00285,
+     -0.008451
+    ]
+   },
+   "size": [
+    0.007388,
+    0.00235,
+    0.011098
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1607,
+   "vertices": 959,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "7",
+    "topCenter": [
+     -0.0555,
+     0.00285,
+     -0.014
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": -4.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     2,
+     1
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_7.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -591.94,
+     84.51,
+     5.0
+    ],
+    "max": [
+     -518.06,
+     195.49,
+     28.5
+    ],
+    "size": [
+     73.88,
+     110.99,
+     23.5
+    ]
+   },
+   "rawBytes": 41604
+  },
+  "SM_Phone_Key_8": {
+   "path": "assets/models/SM_Phone_Key_8.glb",
+   "bytes": 14752,
+   "bounds": {
+    "min": [
+     -0.0595,
+     0.0005,
+     -0.0055
+    ],
+    "max": [
+     -0.0525,
+     0.00285,
+     0.0055
+    ]
+   },
+   "size": [
+    0.007,
+    0.00235,
+    0.011
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 963,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "8",
+    "topCenter": [
+     -0.056,
+     0.00285,
+     -0.0
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 0.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     3,
+     1
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_8.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -595.0,
+     -55.0,
+     5.0
+    ],
+    "max": [
+     -525.0,
+     55.0,
+     28.5
+    ],
+    "size": [
+     70.0,
+     110.0,
+     23.5
+    ]
+   },
+   "rawBytes": 41736
+  },
+  "SM_Phone_Key_9": {
+   "path": "assets/models/SM_Phone_Key_9.glb",
+   "bytes": 14624,
+   "bounds": {
+    "min": [
+     -0.059194,
+     0.0005,
+     0.008451
+    ],
+    "max": [
+     -0.051806,
+     0.00285,
+     0.019549
+    ]
+   },
+   "size": [
+    0.007388,
+    0.00235,
+    0.011098
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 963,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "9",
+    "topCenter": [
+     -0.0555,
+     0.00285,
+     0.014
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 4.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     0,
+     2
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_9.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -591.94,
+     -195.49,
+     5.0
+    ],
+    "max": [
+     -518.06,
+     -84.51,
+     28.5
+    ],
+    "size": [
+     73.88,
+     110.99,
+     23.5
+    ]
+   },
+   "rawBytes": 41736
+  },
+  "SM_Phone_Key_Clear": {
+   "path": "assets/models/SM_Phone_Key_Clear.glb",
+   "bytes": 13224,
+   "bounds": {
+    "min": [
+     -0.027,
+     0.0005,
+     0.0126
+    ],
+    "max": [
+     -0.02,
+     0.00285,
+     0.021
+    ]
+   },
+   "size": [
+    0.007,
+    0.00235,
+    0.0084
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1482,
+   "vertices": 883,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "Clear",
+    "topCenter": [
+     -0.0235,
+     0.00285,
+     0.0168
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 0.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.0084,
+    "labelAtlasCellColRow": [
+     0,
+     3
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_Clear.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -270.0,
+     -210.0,
+     5.0
+    ],
+    "max": [
+     -200.0,
+     -126.0,
+     28.5
+    ],
+    "size": [
+     70.0,
+     84.0,
+     23.5
+    ]
+   },
+   "rawBytes": 38428
+  },
+  "SM_Phone_Key_Down": {
+   "path": "assets/models/SM_Phone_Key_Down.glb",
+   "bytes": 14320,
+   "bounds": {
+    "min": [
+     -0.0292,
+     0.0005,
+     -0.021
+    ],
+    "max": [
+     -0.0238,
+     0.0028,
+     -0.0126
+    ]
+   },
+   "size": [
+    0.0054,
+    0.0023,
+    0.0084
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 963,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "Down",
+    "topCenter": [
+     -0.0265,
+     0.0028,
+     -0.0168
+    ],
+    "topY": 0.0028,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 0.0,
+    "footprintX": 0.0054,
+    "footprintZ": 0.0084,
+    "labelAtlasCellColRow": [
+     2,
+     3
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_Down.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -292.0,
+     126.0,
+     5.0
+    ],
+    "max": [
+     -238.0,
+     210.0,
+     28.0
+    ],
+    "size": [
+     54.0,
+     84.0,
+     23.0
+    ]
+   },
+   "rawBytes": 41744
+  },
+  "SM_Phone_Key_Hash": {
+   "path": "assets/models/SM_Phone_Key_Hash.glb",
+   "bytes": 14376,
+   "bounds": {
+    "min": [
+     -0.069194,
+     0.0005,
+     0.008451
+    ],
+    "max": [
+     -0.061806,
+     0.00285,
+     0.019549
+    ]
+   },
+   "size": [
+    0.007388,
+    0.00235,
+    0.011098
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 963,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "Hash",
+    "topCenter": [
+     -0.0655,
+     0.00285,
+     0.014
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 4.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     3,
+     2
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_Hash.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -691.94,
+     -195.49,
+     5.0
+    ],
+    "max": [
+     -618.06,
+     -84.51,
+     28.5
+    ],
+    "size": [
+     73.88,
+     110.99,
+     23.5
+    ]
+   },
+   "rawBytes": 41740
+  },
+  "SM_Phone_Key_Select": {
+   "path": "assets/models/SM_Phone_Key_Select.glb",
+   "bytes": 13472,
+   "bounds": {
+    "min": [
+     -0.028,
+     0.0005,
+     -0.01
+    ],
+    "max": [
+     -0.019,
+     0.003,
+     0.01
+    ]
+   },
+   "size": [
+    0.009,
+    0.0025,
+    0.02
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1506,
+   "vertices": 892,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "Select",
+    "topCenter": [
+     -0.0235,
+     0.003,
+     -0.0
+    ],
+    "topY": 0.003,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 0.0,
+    "footprintX": 0.009,
+    "footprintZ": 0.02,
+    "labelAtlasCellColRow": [
+     3,
+     3
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_Select.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -280.0,
+     -100.0,
+     5.0
+    ],
+    "max": [
+     -190.0,
+     100.0,
+     30.0
+    ],
+    "size": [
+     90.0,
+     200.0,
+     25.0
+    ]
+   },
+   "rawBytes": 38860
+  },
+  "SM_Phone_Key_Star": {
+   "path": "assets/models/SM_Phone_Key_Star.glb",
+   "bytes": 14452,
+   "bounds": {
+    "min": [
+     -0.069194,
+     0.0005,
+     -0.019549
+    ],
+    "max": [
+     -0.061806,
+     0.00285,
+     -0.008451
+    ]
+   },
+   "size": [
+    0.007388,
+    0.00235,
+    0.011098
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1607,
+   "vertices": 959,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "Star",
+    "topCenter": [
+     -0.0655,
+     0.00285,
+     -0.014
+    ],
+    "topY": 0.00285,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": -4.0,
+    "footprintX": 0.007,
+    "footprintZ": 0.011,
+    "labelAtlasCellColRow": [
+     1,
+     2
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_Star.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -691.94,
+     84.51,
+     5.0
+    ],
+    "max": [
+     -618.06,
+     195.49,
+     28.5
+    ],
+    "size": [
+     73.88,
+     110.99,
+     23.5
+    ]
+   },
+   "rawBytes": 41612
+  },
+  "SM_Phone_Key_Up": {
+   "path": "assets/models/SM_Phone_Key_Up.glb",
+   "bytes": 14460,
+   "bounds": {
+    "min": [
+     -0.0232,
+     0.0005,
+     -0.021
+    ],
+    "max": [
+     -0.0178,
+     0.0028,
+     -0.0126
+    ]
+   },
+   "size": [
+    0.0054,
+    0.0023,
+    0.0084
+   ],
+   "materials": [
+    "MI_KeyRubber"
+   ],
+   "ueMaterials": {
+    "MI_KeyRubber": "MI_KeyRubber"
+   },
+   "scene": "desk",
+   "triangles": 1608,
+   "vertices": 963,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "",
+   "anchors": {
+    "key": "Up",
+    "topCenter": [
+     -0.0205,
+     0.0028,
+     -0.0168
+    ],
+    "topY": 0.0028,
+    "bottomY": 0.0005,
+    "pressTravel": 0.0012,
+    "yawDegAboutY": 0.0,
+    "footprintX": 0.0054,
+    "footprintZ": 0.0084,
+    "labelAtlasCellColRow": [
+     1,
+     3
+    ]
+   },
+   "source": "Art/Export/SM_Phone_Key_Up.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -232.0,
+     126.0,
+     5.0
+    ],
+    "max": [
+     -178.0,
+     210.0,
+     28.0
+    ],
+    "size": [
+     54.0,
+     84.0,
+     23.0
+    ]
+   },
+   "rawBytes": 41740
+  },
+  "SM_Phone_ScreenBezel": {
+   "path": "assets/models/SM_Phone_ScreenBezel.glb",
+   "bytes": 16628,
+   "bounds": {
+    "min": [
+     -0.0167,
+     0,
+     -0.0222
+    ],
+    "max": [
+     0.0167,
+     0.0012,
+     0.0222
+    ]
+   },
+   "size": [
+    0.0334,
+    0.0012,
+    0.0444
+   ],
+   "materials": [
+    "MI_Bezel"
+   ],
+   "ueMaterials": {
+    "MI_Bezel": "MI_Bezel"
+   },
+   "scene": "desk",
+   "triangles": 1584,
+   "vertices": 968,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "Opening 404 (Y) x 280 (X) UU at its base, chamfered to ~416 x 294 at the top; spans Z 0..12 UU.",
+   "source": "Art/Export/SM_Phone_ScreenBezel.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -167.0,
+     -222.0,
+     0.0
+    ],
+    "max": [
+     167.0,
+     222.0,
+     12.0
+    ],
+    "size": [
+     334.0,
+     444.0,
+     12.0
+    ]
+   },
+   "rawBytes": 41752
+  },
+  "SM_Phone_ScreenGlass": {
+   "path": "assets/models/SM_Phone_ScreenGlass.glb",
+   "bytes": 16176,
+   "bounds": {
+    "min": [
+     -0.0165,
+     0.00075,
+     -0.022
+    ],
+    "max": [
+     0.0165,
+     0.0009,
+     0.022
+    ]
+   },
+   "size": [
+    0.033,
+    0.00015,
+    0.044
+   ],
+   "materials": [
+    "MI_ScreenGlass"
+   ],
+   "ueMaterials": {
+    "MI_ScreenGlass": "MI_ScreenGlass"
+   },
+   "scene": "desk",
+   "triangles": 1584,
+   "vertices": 970,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Shared phone pivot = centre of the LCD surface (world origin); identity transform",
+   "notes": "0-1 across the glass (u toward player's right, v toward phone top).",
+   "source": "Art/Export/SM_Phone_ScreenGlass.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -165.0,
+     -220.0,
+     7.5
+    ],
+    "max": [
+     165.0,
+     220.0,
+     9.0
+    ],
+    "size": [
+     330.0,
+     440.0,
+     1.5
+    ]
+   },
+   "rawBytes": 41868
+  },
+  "SM_TopUpCard": {
+   "path": "assets/models/SM_TopUpCard.glb",
+   "bytes": 13816,
+   "bounds": {
+    "min": [
+     -0.0425,
+     0,
+     -0.027
+    ],
+    "max": [
+     0.0425,
+     0.001,
+     0.027
+    ]
+   },
+   "size": [
+    0.085,
+    0.001,
+    0.054
+   ],
+   "materials": [
+    "MI_TopUpCard",
+    "MI_TopUpCard_Back"
+   ],
+   "ueMaterials": {
+    "MI_TopUpCard": "MI_TopUpCard",
+    "MI_TopUpCard_Back": "MI_TopUpCard_Back"
+   },
+   "scene": "desk",
+   "triangles": 1008,
+   "vertices": 674,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Bottom centre, resting on Z=0",
+   "notes": "Lies flat. MI_TopUpCard (front + edges) UV 0-1 over the card face (U -> +X, V -> +Y); MI_TopUpCard_Back UV 0-1 mirrored so it reads correctly when flipped about Y.",
+   "source": "Art/Export/SM_TopUpCard.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -425.0,
+     -270.0,
+     0.0
+    ],
+    "max": [
+     425.0,
+     270.0,
+     10.0
+    ],
+    "size": [
+     850.0,
+     540.0,
+     10.0
+    ]
+   },
+   "rawBytes": 29764
+  },
+  "SM_VirtualPet": {
+   "path": "assets/models/SM_VirtualPet.glb",
+   "bytes": 70064,
+   "bounds": {
+    "min": [
+     -0.02015,
+     0,
+     -0.037049
+    ],
+    "max": [
+     0.02015,
+     0.016085,
+     0.025
+    ]
+   },
+   "size": [
+    0.0403,
+    0.016085,
+    0.062049
+   ],
+   "materials": [
+    "MI_VPet_Shell",
+    "MI_VPet_LCD",
+    "MI_VPet_Button",
+    "MI_Prop_Chrome"
+   ],
+   "ueMaterials": {
+    "MI_VPet_Shell": "MI_VPet_Shell",
+    "MI_VPet_LCD": "MI_VPet_LCD",
+    "MI_VPet_Button": "MI_VPet_Button",
+    "MI_Prop_Chrome": "MI_Prop_Chrome"
+   },
+   "scene": "desk",
+   "triangles": 4940,
+   "vertices": 3621,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Centre of the egg body on Z=0 (keyring extends toward +Y)",
+   "notes": "Egg body 5 (Y) x 4 (X) x 1.5 cm, lies face up, top (keyring) toward +Y; keyring extends ~1.2 cm beyond. MI_VPet_LCD UV 0-1 over the 1.6 x 1.32 cm screen (U -> +X, V -> +Y).",
+   "source": "Art/Export/SM_VirtualPet.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -201.5,
+     -250.0,
+     0.0
+    ],
+    "max": [
+     201.5,
+     370.49,
+     160.85
+    ],
+    "size": [
+     402.99,
+     620.49,
+     160.85
+    ]
+   },
+   "rawBytes": 149696
+  },
+  "SM_Window": {
+   "path": "assets/models/SM_Window.glb",
+   "bytes": 52952,
+   "bounds": {
+    "min": [
+     -0.6,
+     0,
+     -0.06
+    ],
+    "max": [
+     0.6,
+     1,
+     0.11
+    ]
+   },
+   "size": [
+    1.2,
+    1,
+    0.17
+   ],
+   "materials": [
+    "MI_WindowFrame",
+    "MI_NightWindow",
+    "MI_Prop_Chrome"
+   ],
+   "ueMaterials": {
+    "MI_WindowFrame": "MI_WindowFrame",
+    "MI_NightWindow": "MI_NightWindow",
+    "MI_Prop_Chrome": "MI_Prop_Chrome"
+   },
+   "scene": "desk",
+   "triangles": 3188,
+   "vertices": 2686,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre of the frame on Z=0; Y=0 is the frame's mid-depth (wall plane). Sill protrudes to Y=-11 cm (interior side)",
+   "notes": "Stands upright, interior side faces -Y. Sill at Z 0-3, frame to Z=100. MI_NightWindow pane (106 x 84 cm, set 1.5 cm behind the sashes) UV 0-1 across the whole opening (U -> +X, V -> +Z) so the view is continuous behind both sashes.",
+   "source": "Art/Export/SM_Window.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -6000.0,
+     -1100.0,
+     0.0
+    ],
+    "max": [
+     6000.0,
+     600.0,
+     10000.0
+    ],
+    "size": [
+     12000.0,
+     1700.0,
+     10000.0
+    ]
+   },
+   "rawBytes": 108236
+  },
+  "SM_ArenaTile": {
+   "path": "assets/models/SM_ArenaTile.glb",
+   "bytes": 6224,
+   "bounds": {
+    "min": [
+     -0.95,
+     -0.4,
+     -0.95
+    ],
+    "max": [
+     0.95,
+     0,
+     0.95
+    ]
+   },
+   "size": [
+    1.9,
+    0.4,
+    1.9
+   ],
+   "materials": [
+    "Top",
+    "Sides"
+   ],
+   "ueMaterials": {
+    "Top": "MI_Tile_Era2 (Era0: MI_Tile_Era0, Era1: MI_Tile_Era1)",
+    "Sides": "MI_TileSides"
+   },
+   "scene": "arena",
+   "triangles": 188,
+   "vertices": 148,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Top centre: top face at Z=0, tile spans Z -40..0",
+   "notes": "Slot 0 Top = flat top face only, UV0 exactly 0..1 over it (bevel starts 3.5 UU in). Slot 1 Sides = bevels + sides + bottom, box UV (1 UV = 190 UU).",
+   "source": "Art/Export/Arena/SM_ArenaTile.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -95.0,
+     -95.0,
+     -40.0
+    ],
+    "max": [
+     95.0,
+     95.0,
+     0.0
+    ],
+    "size": [
+     190.0,
+     190.0,
+     40.0
+    ]
+   },
+   "rawBytes": 8032
+  },
+  "SM_Backdrop": {
+   "path": "assets/models/SM_Backdrop.glb",
+   "bytes": 34064,
+   "bounds": {
+    "min": [
+     -0.01,
+     -0.01,
+     -0.01
+    ],
+    "max": [
+     0.01,
+     0.01,
+     0.01
+    ]
+   },
+   "size": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "materials": [
+    "Backdrop"
+   ],
+   "ueMaterials": {
+    "Backdrop": "M_Backdrop"
+   },
+   "scene": "arena",
+   "triangles": 3968,
+   "vertices": 2143,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Centre",
+   "notes": "Radius 1 UU (0.01 m in Blender) - scale 400000 in engine for the 400 000 UU backdrop. 64 x 32 UV sphere, faces/normals point INWARD. UV0: U = longitude 0..1, V = 1 at the top pole -> 0.5 horizon -> 0 bottom pole. Slot Backdrop.",
+   "source": "Art/Export/Arena/SM_Backdrop.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -1.0,
+     -1.0,
+     -1.0
+    ],
+    "max": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "size": [
+     2.0,
+     2.0,
+     2.0
+    ]
+   },
+   "rawBytes": 93620
+  },
+  "SM_BoardKerb": {
+   "path": "assets/models/SM_BoardKerb.glb",
+   "bytes": 183796,
+   "bounds": {
+    "min": [
+     -1,
+     0,
+     -0.20345
+    ],
+    "max": [
+     1,
+     0.503181,
+     0.202926
+    ]
+   },
+   "size": [
+    2,
+    0.503181,
+    0.406376
+   ],
+   "materials": [
+    "Stone"
+   ],
+   "ueMaterials": {
+    "Stone": "MI_Kerb_Era2 if present, else tint #9C8A70 (SnakeArena.cpp)"
+   },
+   "scene": "arena",
+   "triangles": 18302,
+   "vertices": 10682,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre on Z=0 (X -100..100, Y -20..20, Z 0..50)",
+   "notes": "Carved sandstone kerb segment for one perimeter cell. Outward (weathered, bullnosed, grooved) face toward UE -Y (modelled at Blender +Y; the export flips Y). Yaw it per board edge so -Y points away from the board. Profile: 9 UU bullnose on the outward top arris, carved 3.6 UU groove (1.2 deep) at Z 32-35 on the outward face, 1.5 UU round on the inner top arris, flat bottom. Weathering (erosion, pits, cracks, chips, face spalls) is periodic in X over the 200 UU length: the X=+-100 end caps are flat, identical outlines with identical custom normals, so segments butt seamlessly in a chain (import normals, don't recompute). Slot Stone. UV0 box projection 1 UV = 200 UU (the outward and inner faces run exactly 0..1 in U per segment, so a tiling texture continues across joints). Vertex colour (linear): R = cavity (cracks/pits/groove), G = edge wear + fresh chip faces, B = moss (up-facing + base band).",
+   "source": "Art/Export/Arena/SM_BoardKerb.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -100.0,
+     -20.29,
+     0.0
+    ],
+    "max": [
+     100.0,
+     20.35,
+     50.32
+    ],
+    "size": [
+     200.0,
+     40.64,
+     50.32
+    ]
+   },
+   "rawBytes": 538472
+  },
+  "SM_Critter": {
+   "path": "assets/models/SM_Critter.glb",
+   "bytes": 363852,
+   "bounds": {
+    "min": [
+     -0.813729,
+     -0.315022,
+     -0.77515
+    ],
+    "max": [
+     0.813729,
+     0.315022,
+     0.77515
+    ]
+   },
+   "size": [
+    1.627458,
+    0.630044,
+    1.5503
+   ],
+   "materials": [
+    "Shell",
+    "Body"
+   ],
+   "ueMaterials": {
+    "Shell": "MI_Critter_Shell",
+    "Body": "MI_Critter_Body"
+   },
+   "scene": "arena",
+   "triangles": 28856,
+   "vertices": 20094,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bounding-box centre; faces +X",
+   "notes": "Golden scarab. Slot 0 Shell = elytra (with striae), pronotum, scutellum, head / toothed clypeus. Slot 1 Body = underside, legs (toothed front tibiae, 5-segment tarsi, claws), eyes, lamellate antennae. UV0 box projection (1 UV = 50 UU).",
+   "anchors": {
+    "feetY": -0.28
+   },
+   "source": "Art/Export/Arena/SM_Critter.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -81.37,
+     -77.52,
+     -31.5
+    ],
+    "max": [
+     81.37,
+     77.52,
+     31.5
+    ],
+    "size": [
+     162.75,
+     155.03,
+     63.0
+    ]
+   },
+   "rawBytes": 818360
+  },
+  "SM_FloatingRock_A": {
+   "path": "assets/models/SM_FloatingRock_A.glb",
+   "bytes": 403668,
+   "bounds": {
+    "min": [
+     -6.292031,
+     -8.4042,
+     -6.957016
+    ],
+    "max": [
+     7.149079,
+     0.529035,
+     6.262651
+    ]
+   },
+   "size": [
+    13.44111,
+    8.933235,
+    13.219667
+   ],
+   "materials": [
+    "Rock",
+    "Grass"
+   ],
+   "ueMaterials": {
+    "Rock": "MI_Island_Rock",
+    "Grass": "MI_Island_Grass"
+   },
+   "scene": "arena",
+   "triangles": 25664,
+   "vertices": 20830,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Plan centre, Z=0 at the grass rim level (cap domes above, rock hangs below)",
+   "notes": "Floating islet: wide grass cap ~1260 UU across (1.5x the body radius), small overhanging lip, then an inverted-cone rock body ~609 deep with stalactite spires and 7 thin hanging roots (some forked) dangling from under the lip. Slots: 0 Rock (underside, spires, roots, boulders), 1 Grass (cap). UV0 box: Grass 1 UV = 400 UU, Rock 1 UV = 600 UU. Vertex colour as SM_Island (R cavity, G depth, B up-facing).",
+   "source": "Art/Export/Arena/SM_FloatingRock_A.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -629.2,
+     -626.27,
+     -840.42
+    ],
+    "max": [
+     714.91,
+     695.7,
+     52.9
+    ],
+    "size": [
+     1344.11,
+     1321.97,
+     893.32
+    ]
+   },
+   "rawBytes": 989724
+  },
+  "SM_FloatingRock_B": {
+   "path": "assets/models/SM_FloatingRock_B.glb",
+   "bytes": 770572,
+   "bounds": {
+    "min": [
+     -12.476928,
+     -16.007999,
+     -12.383435
+    ],
+    "max": [
+     12.976937,
+     0.840759,
+     11.223927
+    ]
+   },
+   "size": [
+    25.453865,
+    16.848758,
+    23.607362
+   ],
+   "materials": [
+    "Rock",
+    "Grass"
+   ],
+   "ueMaterials": {
+    "Rock": "MI_Island_Rock",
+    "Grass": "MI_Island_Grass"
+   },
+   "scene": "arena",
+   "triangles": 50460,
+   "vertices": 40170,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Plan centre, Z=0 at the grass rim level (cap domes above, rock hangs below)",
+   "notes": "Floating islet: wide grass cap ~2400 UU across (1.5x the body radius), small overhanging lip, then an inverted-cone rock body ~1160 deep with stalactite spires and 10 thin hanging roots (some forked) dangling from under the lip. Slots: 0 Rock (underside, spires, roots, boulders), 1 Grass (cap). UV0 box: Grass 1 UV = 400 UU, Rock 1 UV = 600 UU. Vertex colour as SM_Island (R cavity, G depth, B up-facing).",
+   "source": "Art/Export/Arena/SM_FloatingRock_B.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -1247.69,
+     -1122.39,
+     -1600.8
+    ],
+    "max": [
+     1297.69,
+     1238.34,
+     84.08
+    ],
+    "size": [
+     2545.39,
+     2360.74,
+     1684.88
+    ]
+   },
+   "rawBytes": 1912112
+  },
+  "SM_FloatingRock_C": {
+   "path": "assets/models/SM_FloatingRock_C.glb",
+   "bytes": 1416020,
+   "bounds": {
+    "min": [
+     -21.782032,
+     -28.014,
+     -23.427999
+    ],
+    "max": [
+     21.766685,
+     1.765333,
+     21.116573
+    ]
+   },
+   "size": [
+    43.548717,
+    29.779333,
+    44.544572
+   ],
+   "materials": [
+    "Rock",
+    "Grass"
+   ],
+   "ueMaterials": {
+    "Rock": "MI_Island_Rock",
+    "Grass": "MI_Island_Grass"
+   },
+   "scene": "arena",
+   "triangles": 96976,
+   "vertices": 74702,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Plan centre, Z=0 at the grass rim level (cap domes above, rock hangs below)",
+   "notes": "Floating islet: wide grass cap ~4200 UU across (1.5x the body radius), small overhanging lip, then an inverted-cone rock body ~2030 deep with stalactite spires and 14 thin hanging roots (some forked) dangling from under the lip. Slots: 0 Rock (underside, spires, roots, boulders), 1 Grass (cap). UV0 box: Grass 1 UV = 400 UU, Rock 1 UV = 600 UU. Vertex colour as SM_Island (R cavity, G depth, B up-facing).",
+   "source": "Art/Export/Arena/SM_FloatingRock_C.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -2178.2,
+     -2111.66,
+     -2801.4
+    ],
+    "max": [
+     2176.67,
+     2342.8,
+     176.53
+    ],
+    "size": [
+     4354.87,
+     4454.46,
+     2977.93
+    ]
+   },
+   "rawBytes": 3572496
+  },
+  "SM_FoodOrb": {
+   "path": "assets/models/SM_FoodOrb.glb",
+   "bytes": 80056,
+   "bounds": {
+    "min": [
+     -0.696492,
+     -0.556521,
+     -0.707058
+    ],
+    "max": [
+     0.69355,
+     0.815193,
+     0.705853
+    ]
+   },
+   "size": [
+    1.390042,
+    1.371714,
+    1.412911
+   ],
+   "materials": [
+    "Fruit",
+    "Leaf"
+   ],
+   "ueMaterials": {
+    "Fruit": "MI_Food_Era2 (Era1: MI_Food_Era1)",
+    "Leaf": "MI_FoodLeaf (Era1: MI_FoodLeaf_Era1)"
+   },
+   "scene": "arena",
+   "triangles": 9352,
+   "vertices": 4935,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Centre of the fruit body (stem/leaf rise above it to ~+100 UU)",
+   "notes": "Slot 0 Fruit: golden plum/apple, radius ~70, 5 soft lobes + a plum crease on +X. UV0 spherical (U = longitude 0..1 from +X, V = 1 top -> 0 bottom). Slot 1 Leaf: the leaf (two-sided shell, UV0 U 0..1 base->tip, V 0..1 across, midrib at V=0.5) and the stem (UV0 squeezed into U 0..0.02, i.e. the leaf texture's base edge).",
+   "source": "Art/Export/Arena/SM_FoodOrb.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -69.65,
+     -70.59,
+     -55.65
+    ],
+    "max": [
+     69.35,
+     70.71,
+     81.52
+    ],
+    "size": [
+     139.0,
+     141.29,
+     137.17
+    ]
+   },
+   "rawBytes": 216228
+  },
+  "SM_GrassTuft": {
+   "path": "assets/models/SM_GrassTuft.glb",
+   "bytes": 7392,
+   "bounds": {
+    "min": [
+     -0.181663,
+     -0.01,
+     -0.167401
+    ],
+    "max": [
+     0.160509,
+     0.400071,
+     0.120715
+    ]
+   },
+   "size": [
+    0.342172,
+    0.410071,
+    0.288116
+   ],
+   "materials": [
+    "Grass"
+   ],
+   "ueMaterials": {
+    "Grass": "MI_GrassTuft"
+   },
+   "scene": "arena",
+   "triangles": 336,
+   "vertices": 294,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Base centre on Z=0 (blade roots 1 UU below)",
+   "notes": "14 modelled V-folded blades (use a two-sided material). UV0 per blade: U 0..1 across the blade (0.5 = midrib), V 0 root -> 1 tip, so one blade texture (alpha/gradient) maps onto every blade. Slot Grass.",
+   "source": "Art/Export/Arena/SM_GrassTuft.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -18.17,
+     -12.07,
+     -1.0
+    ],
+    "max": [
+     16.05,
+     16.74,
+     40.01
+    ],
+    "size": [
+     34.22,
+     28.81,
+     41.01
+    ]
+   },
+   "rawBytes": 12676
+  },
+  "SM_Island": {
+   "path": "assets/models/SM_Island.glb",
+   "bytes": 4003948,
+   "bounds": {
+    "min": [
+     -39.306923,
+     -35,
+     -38.967506
+    ],
+    "max": [
+     38.96936,
+     0.483867,
+     38.918346
+    ]
+   },
+   "size": [
+    78.276283,
+    35.483867,
+    77.885852
+   ],
+   "materials": [
+    "Rock",
+    "Grass",
+    "Earth"
+   ],
+   "ueMaterials": {
+    "Rock": "MI_Island_Rock",
+    "Grass": "MI_Island_Grass",
+    "Earth": "MI_Island_Earth"
+   },
+   "scene": "arena",
+   "triangles": 315690,
+   "vertices": 230927,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Board centre at origin, Z=0 = board top (tile tops)",
+   "notes": "Square recess 4800 x 4800 centred on the origin, floor at Z=-40 (40 UU tiles sit flush at Z=0), recess walls Z=-40..0 (Earth). The board is a raised PLINTH: a dressed stone wall (slot Rock) 60 UU thick around the recess, X/Y +-2400..+-2460, flat seat at Z=0 (54 UU wide, for SM_BoardKerb: a 40 UU kerb centred 30 UU outside the board edge fits on it), 6 UU rounded outer arris, vertical face with a course joint at Z=-45, chamfered footing course (face +4.5 UU) down to the ground ring at Z=-120 (+-2468). Then a flat gravel/dirt APRON (slot Earth, Z -120..-122) to ~310 UU from the plinth face (ragged edge +-35 UU, i.e. to |x|,|y| ~ 2770), then the GRASS rim (slot Grass): rises gently ~10 UU, rolls over into the soil lip (Earth) at ~Z=-165, lip 3760 +- 160 from the centre (~1360 on the axes). Then the rocky underside (Rock) with strata ledges + fluting down to ~Z=-3600 plus 23 hanging spires and 5 low boulder clusters on the rim. UV0 box projection: Grass/Earth 1 UV = 400 UU, Rock 1 UV = 600 UU. Vertex colour (linear): R = cavity, G = depth below the top (0 at Z=0 -> 1 at Z=-3500), B = up-facing mask (moss/grass creep).",
+   "source": "Art/Export/Arena/SM_Island.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -3930.69,
+     -3891.83,
+     -3500.0
+    ],
+    "max": [
+     3896.94,
+     3896.75,
+     48.39
+    ],
+    "size": [
+     7827.63,
+     7788.59,
+     3548.39
+    ]
+   },
+   "rawBytes": 12394780
+  },
+  "SM_NeonBlock": {
+   "path": "assets/models/SM_NeonBlock.glb",
+   "bytes": 50892,
+   "bounds": {
+    "min": [
+     -0.95,
+     0,
+     -0.95
+    ],
+    "max": [
+     0.95,
+     1.6,
+     0.95
+    ]
+   },
+   "size": [
+    1.9,
+    1.6,
+    1.9
+   ],
+   "materials": [
+    "Body",
+    "Edge"
+   ],
+   "ueMaterials": {
+    "Body": "MI_Wall_Era1",
+    "Edge": "MI_NeonEdge"
+   },
+   "scene": "arena",
+   "triangles": 6056,
+   "vertices": 3690,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre on Z=0",
+   "notes": "Slot 0 Body = rounded block (edge radius 12, plan corner radius 14). Slot 1 Edge = 3 UU wide, 1.2 UU proud band on the top edge loop + the 4 vertical corner edges (emissive). Box UV on Body (1 UV = 190 UU).",
+   "source": "Art/Export/Arena/SM_NeonBlock.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -95.0,
+     -95.0,
+     0.0
+    ],
+    "max": [
+     95.0,
+     95.0,
+     160.0
+    ],
+    "size": [
+     190.0,
+     190.0,
+     160.0
+    ]
+   },
+   "rawBytes": 156780
+  },
+  "SM_Ruin_A": {
+   "path": "assets/models/SM_Ruin_A.glb",
+   "bytes": 936772,
+   "bounds": {
+    "min": [
+     -0.962067,
+     -0.000362,
+     -0.952873
+    ],
+    "max": [
+     0.963472,
+     1.651578,
+     0.951894
+    ]
+   },
+   "size": [
+    1.925539,
+    1.65194,
+    1.904767
+   ],
+   "materials": [
+    "Stone"
+   ],
+   "ueMaterials": {
+    "Stone": "MI_Ruin_Stone"
+   },
+   "scene": "arena",
+   "triangles": 70000,
+   "vertices": 49388,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre on Z=0",
+   "notes": "Weathered ashlar block on a plinth course, slanted fractured top. Slot Stone. UV0 box projection, 1 UV = 200 UU (one cell); use triplanar/world-aligned if seams show. Vertex colour (linear): R = cavity (cracks/pits), G = edge wear (convexity), B = moss mask (up-facing, noise).",
+   "source": "Art/Export/Arena/SM_Ruin_A.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -96.21,
+     -95.19,
+     -0.04
+    ],
+    "max": [
+     96.35,
+     95.29,
+     165.16
+    ],
+    "size": [
+     192.55,
+     190.48,
+     165.19
+    ]
+   },
+   "rawBytes": 2396956
+  },
+  "SM_Ruin_B": {
+   "path": "assets/models/SM_Ruin_B.glb",
+   "bytes": 1021768,
+   "bounds": {
+    "min": [
+     -0.973598,
+     -0.000279,
+     -0.972836
+    ],
+    "max": [
+     0.972623,
+     2.591838,
+     0.972075
+    ]
+   },
+   "size": [
+    1.946221,
+    2.592117,
+    1.944911
+   ],
+   "materials": [
+    "Stone"
+   ],
+   "ueMaterials": {
+    "Stone": "MI_Ruin_Stone"
+   },
+   "scene": "arena",
+   "triangles": 75000,
+   "vertices": 52329,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre on Z=0",
+   "notes": "Fluted column stump (18 flutes) on a square plinth with a torus moulding, broken jagged top. Slot Stone. UV0 box projection, 1 UV = 200 UU (one cell); use triplanar/world-aligned if seams show. Vertex colour (linear): R = cavity (cracks/pits), G = edge wear (convexity), B = moss mask (up-facing, noise).",
+   "source": "Art/Export/Arena/SM_Ruin_B.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -97.36,
+     -97.21,
+     -0.03
+    ],
+    "max": [
+     97.26,
+     97.28,
+     259.18
+    ],
+    "size": [
+     194.62,
+     194.49,
+     259.21
+    ]
+   },
+   "rawBytes": 2544596
+  },
+  "SM_Ruin_C": {
+   "path": "assets/models/SM_Ruin_C.glb",
+   "bytes": 1120092,
+   "bounds": {
+    "min": [
+     -0.943303,
+     -0.000293,
+     -0.92952
+    ],
+    "max": [
+     0.964538,
+     2.0904,
+     0.928857
+    ]
+   },
+   "size": [
+    1.907841,
+    2.090693,
+    1.858377
+   ],
+   "materials": [
+    "Stone"
+   ],
+   "ueMaterials": {
+    "Stone": "MI_Ruin_Stone"
+   },
+   "scene": "arena",
+   "triangles": 74999,
+   "vertices": 57555,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126"
+   ],
+   "pivot": "Bottom centre on Z=0",
+   "notes": "Collapsed masonry: two lower blocks, a skewed upper course and a capstone, with open joints between stones. Slot Stone. UV0 box projection, 1 UV = 200 UU (one cell); use triplanar/world-aligned if seams show. Vertex colour (linear): R = cavity (cracks/pits), G = edge wear (convexity), B = moss mask (up-facing, noise).",
+   "source": "Art/Export/Arena/SM_Ruin_C.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -94.33,
+     -92.89,
+     -0.03
+    ],
+    "max": [
+     96.45,
+     92.95,
+     209.04
+    ],
+    "size": [
+     190.78,
+     185.84,
+     209.07
+    ]
+   },
+   "rawBytes": 2753628
+  },
+  "SM_SnakeBody": {
+   "path": "assets/models/SM_SnakeBody.glb",
+   "bytes": 4880,
+   "bounds": {
+    "min": [
+     0,
+     -0.45,
+     -0.5
+    ],
+    "max": [
+     1,
+     0.5,
+     0.5
+    ]
+   },
+   "size": [
+    1,
+    0.95,
+    1.0
+   ],
+   "materials": [
+    "Skin"
+   ],
+   "ueMaterials": {
+    "Skin": "MI_Snake_Era2 (Era1: MI_Snake_Era1)"
+   },
+   "scene": "arena",
+   "triangles": 384,
+   "vertices": 225,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Start of tube at origin, axis +X, X 0..100",
+   "notes": "underside (V=0/1 at the belly centre line) 24 radial x 8 length segments, open ends, shared verts at the V seam (UV split only, so normals are continuous). UV0: U = X/100 (0..1 along length), V = 0 at the belly centre -> 0.25 on the Blender +Y side (= UE -Y) -> 0.5 back -> 0.75 -> 1 belly. Cross-section: top & sides radius 50, belly a superellipse 45 deep (10% flatter). Slot Skin.",
+   "source": "Art/Export/Arena/SM_SnakeBody.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     0.0,
+     -50.0,
+     -45.0
+    ],
+    "max": [
+     100.0,
+     50.0,
+     50.0
+    ],
+    "size": [
+     100.0,
+     100.0,
+     95.0
+    ]
+   },
+   "rawBytes": 10656
+  },
+  "SM_SnakeHead": {
+   "path": "assets/models/SM_SnakeHead.glb",
+   "bytes": 386620,
+   "bounds": {
+    "min": [
+     -0.08,
+     -0.45,
+     -0.623131
+    ],
+    "max": [
+     1.88,
+     0.49771,
+     0.623131
+    ]
+   },
+   "size": [
+    1.96,
+    0.94771,
+    1.246262
+   ],
+   "materials": [
+    "Skin",
+    "Eyes",
+    "Mouth"
+   ],
+   "ueMaterials": {
+    "Skin": "MI_SnakeHead_Era2 (Era1: MI_SnakeHead_Era1)",
+    "Eyes": "MI_SnakeEye",
+    "Mouth": "MI_SnakeMouth"
+   },
+   "scene": "arena",
+   "triangles": 36744,
+   "vertices": 19130,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap",
+    "TEXCOORD_1": "UVPlan"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5126",
+    "TEXCOORD_1:5123n"
+   ],
+   "pivot": "Neck centre at origin; head faces +X; the neck ring (X -8..0) matches the body tube section (radius 50, flat belly) and is tucked 3% inside it behind X=0.",
+   "notes": "Slots: 0 Skin, 1 Eyes (two UV spheres, UV0 planar from the front: iris/pupil centred at UV 0.5,0.5, V up), 2 Mouth (the lip-seam groove from the mouth corner round the snout). UV0 on Skin = unwrap: U = arc length along the head from X=0 (1 UV = 100 UU, like SM_SnakeBody), V = 0.5 on the top centre line, arc around / neck circumference, seam on the underside (V 0/1 at the neck matches the body). UV1 'UVPlan' = top-down planar 0..1 over the head (large head scutes). Vertex colour (linear): R = head-plate mask (top), G = belly mask, B = cavity.",
+   "anchors": {
+    "eyes": [
+     {
+      "center": [
+       1.1984,
+       0.2054,
+       0.3393
+      ],
+      "axis": [
+       0.4786,
+       0.512,
+       0.7133
+      ],
+      "radius": 0.132
+     },
+     {
+      "center": [
+       1.1984,
+       0.2054,
+       -0.3393
+      ],
+      "axis": [
+       0.4786,
+       0.512,
+       -0.7133
+      ],
+      "radius": 0.132
+     }
+    ],
+    "tongueSocket": [
+     1.83,
+     -0.035,
+     0.0
+    ]
+   },
+   "source": "Art/Export/Arena/SM_SnakeHead.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -8.0,
+     -62.31,
+     -45.0
+    ],
+    "max": [
+     188.0,
+     62.31,
+     49.77
+    ],
+    "size": [
+     196.0,
+     124.63,
+     94.77
+    ]
+   },
+   "rawBytes": 1142808
+  },
+  "SM_SnakeTongue": {
+   "path": "assets/models/SM_SnakeTongue.glb",
+   "bytes": 12244,
+   "bounds": {
+    "min": [
+     -0.000911,
+     -0.009707,
+     -0.08162
+    ],
+    "max": [
+     0.576217,
+     0.020168,
+     0.08162
+    ]
+   },
+   "size": [
+    0.577128,
+    0.029875,
+    0.16324
+   ],
+   "materials": [
+    "Tongue"
+   ],
+   "ueMaterials": {
+    "Tongue": "MI_SnakeTongue"
+   },
+   "scene": "arena",
+   "triangles": 1144,
+   "vertices": 578,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Root at origin (X=0), extends +X",
+   "notes": "Slot Tongue. Horizontal fork (tines spread in +-Y). UV U along length.",
+   "source": "Art/Export/Arena/SM_SnakeTongue.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -0.09,
+     -8.16,
+     -0.97
+    ],
+    "max": [
+     57.62,
+     8.16,
+     2.02
+    ],
+    "size": [
+     57.71,
+     16.32,
+     2.99
+    ]
+   },
+   "rawBytes": 26628
+  },
+  "SM_Voxel": {
+   "path": "assets/models/SM_Voxel.glb",
+   "bytes": 4696,
+   "bounds": {
+    "min": [
+     -0.5,
+     -0.5,
+     -0.5
+    ],
+    "max": [
+     0.5,
+     0.5,
+     0.5
+    ]
+   },
+   "size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Voxel"
+   ],
+   "ueMaterials": {
+    "Voxel": "MI_Snake_Era0 / MI_Food_Era0 / MI_Wall_Era0 (olive LCD voxel)"
+   },
+   "scene": "arena",
+   "triangles": 188,
+   "vertices": 144,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {},
+   "attributes": [
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Centre",
+   "notes": "Slot Voxel. Box UV, each face 0..1.",
+   "source": "Art/Export/Arena/SM_Voxel.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -50.0,
+     -50.0,
+     -50.0
+    ],
+    "max": [
+     50.0,
+     50.0,
+     50.0
+    ],
+    "size": [
+     100.0,
+     100.0,
+     100.0
+    ]
+   },
+   "rawBytes": 6868
+  },
+  "SM_VoxelHead": {
+   "path": "assets/models/SM_VoxelHead.glb",
+   "bytes": 8292,
+   "bounds": {
+    "min": [
+     -0.5,
+     -0.5,
+     -0.5
+    ],
+    "max": [
+     0.5,
+     0.5,
+     0.5
+    ]
+   },
+   "size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "materials": [
+    "Voxel"
+   ],
+   "ueMaterials": {
+    "Voxel": "MI_Snake_Era0"
+   },
+   "scene": "arena",
+   "triangles": 412,
+   "vertices": 344,
+   "uvSets": {
+    "TEXCOORD_0": "UVMap"
+   },
+   "colorAttributes": {
+    "COLOR_0": "Col"
+   },
+   "attributes": [
+    "COLOR_0:5121n",
+    "NORMAL:5120n",
+    "POSITION:5126",
+    "TEXCOORD_0:5123n"
+   ],
+   "pivot": "Centre (same as SM_Voxel), facing +X",
+   "notes": "100 UU cube with SM_Voxel's 7 UU / 3-segment bevel. Two square eye notches 22 x 22 UU, 12 UU deep, in the top face (+Z) toward +X: centres X=+22, Y=+-19, rims softened with a 1.4 UU bevel. Slot Voxel. Box UV, each face 0..1. Vertex colour R = 1 inside the notches (optional darker/emissive eye tint), else 0.",
+   "source": "Art/Export/Arena/SM_VoxelHead.fbx",
+   "sourceBoundsUU": {
+    "min": [
+     -50.0,
+     -50.0,
+     -50.0
+    ],
+    "max": [
+     50.0,
+     50.0,
+     50.0
+    ],
+    "size": [
+     100.0,
+     100.0,
+     100.0
+    ]
+   },
+   "rawBytes": 17536
+  }
+ },
+ "textures": {
+  "KeyArt_RetroSnake": {
+   "path": "assets/textures/KeyArt_RetroSnake.webp",
+   "bytes": 83328,
+   "width": 1536,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/KeyArt_RetroSnake.png",
+   "sourceSize": [
+    1536,
+    1024
+   ],
+   "notes": "Marketing key art / splash (UI, not a material texture)."
+  },
+  "T_CDArt_A": {
+   "path": "assets/textures/T_CDArt_A.webp",
+   "bytes": 41406,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_CDArt_A.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_CDArt_B": {
+   "path": "assets/textures/T_CDArt_B.webp",
+   "bytes": 114622,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_CDArt_B.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_CDArt_C": {
+   "path": "assets/textures/T_CDArt_C.webp",
+   "bytes": 287874,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_CDArt_C.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_CRTScreen": {
+   "path": "assets/textures/T_CRTScreen.webp",
+   "bytes": 28170,
+   "width": 1024,
+   "height": 768,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_CRTScreen.png",
+   "sourceSize": [
+    1024,
+    768
+   ],
+   "notes": "Emissive CRT content; the shader adds scanlines."
+  },
+  "T_DeskWood": {
+   "path": "assets/textures/T_DeskWood.webp",
+   "bytes": 522026,
+   "width": 2048,
+   "height": 2048,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_DeskWood.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_DeskWood_N": {
+   "path": "assets/textures/T_DeskWood_N.webp",
+   "bytes": 1558228,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "normal",
+   "channels": {
+    "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "source": "Art/Textures/T_DeskWood_N.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_DeskWood_R": {
+   "path": "assets/textures/T_DeskWood_R.webp",
+   "bytes": 327074,
+   "width": 2048,
+   "height": 2048,
+   "colorSpace": "linear",
+   "kind": "roughness",
+   "channels": {
+    "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_DeskWood_R.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Faceplate_Camo": {
+   "path": "assets/textures/T_Faceplate_Camo.webp",
+   "bytes": 147340,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_Faceplate_Camo.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_Faceplate_Flakes_M": {
+   "path": "assets/textures/T_Faceplate_Flakes_M.webp",
+   "bytes": 151034,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "mask",
+   "channels": {
+    "r=g=b": "mask 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_Faceplate_Flakes_M.png",
+   "sourceSize": [
+    1024,
+    1024
+   ],
+   "notes": "Glitter sparkle mask shared by all covers (apply the -60 % flake intensity in the material)."
+  },
+  "T_Faceplate_Flames": {
+   "path": "assets/textures/T_Faceplate_Flames.webp",
+   "bytes": 39878,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_Faceplate_Flames.png",
+   "sourceSize": [
+    1024,
+    1024
+   ],
+   "notes": "One motif per cover (0-1 UV), not a repeat."
+  },
+  "T_Faceplate_Ice": {
+   "path": "assets/textures/T_Faceplate_Ice.webp",
+   "bytes": 82330,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_Faceplate_Ice.png",
+   "sourceSize": [
+    1024,
+    1024
+   ],
+   "notes": "Translucent cover (opacity ~0.7)."
+  },
+  "T_Faceplate_Navy": {
+   "path": "assets/textures/T_Faceplate_Navy.webp",
+   "bytes": 48904,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_Faceplate_Navy.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_KeyLabels": {
+   "path": "assets/textures/T_KeyLabels.webp",
+   "bytes": 44580,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_KeyLabels.png",
+   "sourceSize": [
+    1024,
+    1024
+   ],
+   "notes": "4x4 key-label atlas `1 2 3 4 / 5 6 7 8 / 9 * 0 # / C up down select` (see anchors.labelAtlasCellColRow on the key models). Base colour of MI_KeyRubber."
+  },
+  "T_KeyLabels_Glow": {
+   "path": "assets/textures/T_KeyLabels_Glow.webp",
+   "bytes": 17792,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "mask",
+   "channels": {
+    "r=g=b": "mask 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP",
+   "source": "Art/Textures/T_KeyLabels_Glow.png",
+   "sourceSize": [
+    1024,
+    1024
+   ],
+   "notes": "Emissive mask for MI_KeyRubber x green keypad backlight; texel-aligned with T_KeyLabels."
+  },
+  "T_LCDBacklightFalloff": {
+   "path": "assets/textures/T_LCDBacklightFalloff.webp",
+   "bytes": 9958,
+   "width": 512,
+   "height": 512,
+   "colorSpace": "linear",
+   "kind": "mask",
+   "channels": {
+    "r=g=b": "mask 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_LCDBacklightFalloff.png",
+   "sourceSize": [
+    512,
+    512
+   ],
+   "notes": "LCD backlight emissive intensity (v=1 edge brightest); lerp #7FA650 -> #B8D86A by it."
+  },
+  "T_LCDGrid": {
+   "path": "assets/textures/T_LCDGrid.webp",
+   "bytes": 104,
+   "width": 512,
+   "height": 512,
+   "colorSpace": "linear",
+   "kind": "mask",
+   "channels": {
+    "r=g=b": "mask 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP",
+   "source": "Art/Textures/T_LCDGrid.png",
+   "sourceSize": [
+    512,
+    512
+   ],
+   "notes": "LCD backplane multiply, 128x128 cells of 4 px (gutter 0.80). Use NearestFilter or a strong mip bias; UV x95/128, x64/128 over the active area."
+  },
+  "T_NightWindow": {
+   "path": "assets/textures/T_NightWindow.webp",
+   "bytes": 16922,
+   "width": 1024,
+   "height": 512,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_NightWindow.png",
+   "sourceSize": [
+    2048,
+    1024
+   ],
+   "notes": "Emissive plane behind SM_Window (MI_NightWindow)."
+  },
+  "T_Poster_A": {
+   "path": "assets/textures/T_Poster_A.webp",
+   "bytes": 173194,
+   "width": 683,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_Poster_A.png",
+   "sourceSize": [
+    1024,
+    1536
+   ]
+  },
+  "T_Poster_B": {
+   "path": "assets/textures/T_Poster_B.webp",
+   "bytes": 92498,
+   "width": 683,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/T_Poster_B.png",
+   "sourceSize": [
+    1024,
+    1536
+   ]
+  },
+  "T_FruitSkin_D": {
+   "path": "assets/textures/arena/T_FruitSkin_D.webp",
+   "bytes": 198014,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_FruitSkin_D.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_FruitSkin_N": {
+   "path": "assets/textures/arena/T_FruitSkin_N.webp",
+   "bytes": 293642,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "normal",
+   "channels": {
+    "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "source": "Art/Textures/Arena/T_FruitSkin_N.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_FruitSkin_R": {
+   "path": "assets/textures/arena/T_FruitSkin_R.webp",
+   "bytes": 199948,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "roughness",
+   "channels": {
+    "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_FruitSkin_R.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_Grass_AO": {
+   "path": "assets/textures/arena/T_Grass_AO.webp",
+   "bytes": 612340,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "ao",
+   "channels": {
+    "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Grass_AO.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Grass_D": {
+   "path": "assets/textures/arena/T_Grass_D.webp",
+   "bytes": 459928,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Grass_D.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Grass_H": {
+   "path": "assets/textures/arena/T_Grass_H.webp",
+   "bytes": 511364,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "height",
+   "channels": {
+    "r=g=b": "height 0..1 (8-bit from the 16-bit source) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Grass_H.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Grass_N": {
+   "path": "assets/textures/arena/T_Grass_N.webp",
+   "bytes": 2152764,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "normal",
+   "channels": {
+    "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "source": "Art/Textures/Arena/T_Grass_N.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Grass_R": {
+   "path": "assets/textures/arena/T_Grass_R.webp",
+   "bytes": 280212,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "roughness",
+   "channels": {
+    "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Grass_R.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_GrassBlade": {
+   "path": "assets/textures/arena/T_GrassBlade.webp",
+   "bytes": 23104,
+   "width": 512,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)",
+    "a": "coverage / alpha (linear)"
+   },
+   "alpha": true,
+   "encoding": "lossy WebP q85 + lossless alpha",
+   "source": "Art/Textures/Arena/T_GrassBlade.png",
+   "sourceSize": [
+    512,
+    1024
+   ],
+   "notes": "Masked (alphaTest ~0.5), two-sided. RGB is bled under transparent texels (encoded with exact=True)."
+  },
+  "T_LCDTile": {
+   "path": "assets/textures/arena/T_LCDTile.webp",
+   "bytes": 3638,
+   "width": 512,
+   "height": 512,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_LCDTile.png",
+   "sourceSize": [
+    512,
+    512
+   ],
+   "notes": "MI_Tile_Era0 top, used as emissive x Glow; LED hotspot at the V=1 edge."
+  },
+  "T_Moss_AO": {
+   "path": "assets/textures/arena/T_Moss_AO.webp",
+   "bytes": 488438,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "ao",
+   "channels": {
+    "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Moss_AO.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Moss_D": {
+   "path": "assets/textures/arena/T_Moss_D.webp",
+   "bytes": 291528,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Moss_D.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Moss_H": {
+   "path": "assets/textures/arena/T_Moss_H.webp",
+   "bytes": 303516,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "height",
+   "channels": {
+    "r=g=b": "height 0..1 (8-bit from the 16-bit source) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Moss_H.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Moss_N": {
+   "path": "assets/textures/arena/T_Moss_N.webp",
+   "bytes": 2112256,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "normal",
+   "channels": {
+    "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "source": "Art/Textures/Arena/T_Moss_N.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Moss_R": {
+   "path": "assets/textures/arena/T_Moss_R.webp",
+   "bytes": 173166,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "roughness",
+   "channels": {
+    "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Moss_R.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_NeonGrid": {
+   "path": "assets/textures/arena/T_NeonGrid.webp",
+   "bytes": 7978,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "packedMask",
+   "channels": {
+    "r": "all grid lines combined (emissive mask)",
+    "g": "major lines (tile border, one cell per tile)",
+    "b": "minor 4x4 subdivision lines"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP (packed channels)",
+   "source": "Art/Textures/Arena/T_NeonGrid.png",
+   "sourceSize": [
+    1024,
+    1024
+   ],
+   "notes": "Packed mask, stored lossless so channels don't bleed."
+  },
+  "T_Rock_AO": {
+   "path": "assets/textures/arena/T_Rock_AO.webp",
+   "bytes": 378216,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "ao",
+   "channels": {
+    "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Rock_AO.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Rock_D": {
+   "path": "assets/textures/arena/T_Rock_D.webp",
+   "bytes": 187706,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Rock_D.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Rock_H": {
+   "path": "assets/textures/arena/T_Rock_H.webp",
+   "bytes": 176932,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "height",
+   "channels": {
+    "r=g=b": "height 0..1 (8-bit from the 16-bit source) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Rock_H.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Rock_N": {
+   "path": "assets/textures/arena/T_Rock_N.webp",
+   "bytes": 2098724,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "normal",
+   "channels": {
+    "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "source": "Art/Textures/Arena/T_Rock_N.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Rock_R": {
+   "path": "assets/textures/arena/T_Rock_R.webp",
+   "bytes": 168388,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "roughness",
+   "channels": {
+    "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Rock_R.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_Scarab_D": {
+   "path": "assets/textures/arena/T_Scarab_D.webp",
+   "bytes": 257820,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Scarab_D.png",
+   "sourceSize": [
+    1024,
+    1024
+   ],
+   "notes": "Metallic F0 colour (metallic = 1)."
+  },
+  "T_Scarab_N": {
+   "path": "assets/textures/arena/T_Scarab_N.webp",
+   "bytes": 1829432,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "normal",
+   "channels": {
+    "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "source": "Art/Textures/Arena/T_Scarab_N.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_Scarab_R": {
+   "path": "assets/textures/arena/T_Scarab_R.webp",
+   "bytes": 208990,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "roughness",
+   "channels": {
+    "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_Scarab_R.png",
+   "sourceSize": [
+    1024,
+    1024
+   ]
+  },
+  "T_SnakeScales_AO": {
+   "path": "assets/textures/arena/T_SnakeScales_AO.webp",
+   "bytes": 356930,
+   "width": 2048,
+   "height": 2048,
+   "colorSpace": "linear",
+   "kind": "ao",
+   "channels": {
+    "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_SnakeScales_AO.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_SnakeScales_D": {
+   "path": "assets/textures/arena/T_SnakeScales_D.webp",
+   "bytes": 264930,
+   "width": 2048,
+   "height": 2048,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_SnakeScales_D.png",
+   "sourceSize": [
+    2048,
+    2048
+   ],
+   "notes": "U = along the body (24 scales/tile), V = around (48 rows); V 0/1 = belly scutes."
+  },
+  "T_SnakeScales_Iridescence": {
+   "path": "assets/textures/arena/T_SnakeScales_Iridescence.webp",
+   "bytes": 310554,
+   "width": 2048,
+   "height": 2048,
+   "colorSpace": "linear",
+   "kind": "mask",
+   "channels": {
+    "r=g=b": "mask 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_SnakeScales_Iridescence.png",
+   "sourceSize": [
+    2048,
+    2048
+   ],
+   "notes": "Thin-film sheen weight (multiply a view-angle hue shift by it)."
+  },
+  "T_SnakeScales_N": {
+   "path": "assets/textures/arena/T_SnakeScales_N.webp",
+   "bytes": 1204092,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "normal",
+   "channels": {
+    "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "source": "Art/Textures/Arena/T_SnakeScales_N.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_SnakeScales_R": {
+   "path": "assets/textures/arena/T_SnakeScales_R.webp",
+   "bytes": 1087356,
+   "width": 2048,
+   "height": 2048,
+   "colorSpace": "linear",
+   "kind": "roughness",
+   "channels": {
+    "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_SnakeScales_R.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_StonePaver_AO": {
+   "path": "assets/textures/arena/T_StonePaver_AO.webp",
+   "bytes": 126182,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "ao",
+   "channels": {
+    "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_StonePaver_AO.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_StonePaver_D": {
+   "path": "assets/textures/arena/T_StonePaver_D.webp",
+   "bytes": 79992,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "colour (sRGB)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_StonePaver_D.png",
+   "sourceSize": [
+    2048,
+    2048
+   ],
+   "notes": "MI_Tile_Era2 top, one slab over the 0-1 UV of SM_ArenaTile slot Top."
+  },
+  "T_StonePaver_H": {
+   "path": "assets/textures/arena/T_StonePaver_H.webp",
+   "bytes": 50638,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "height",
+   "channels": {
+    "r=g=b": "height 0..1 (8-bit from the 16-bit source) (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_StonePaver_H.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_StonePaver_N": {
+   "path": "assets/textures/arena/T_StonePaver_N.webp",
+   "bytes": 1081780,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "normal",
+   "channels": {
+    "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
+   },
+   "alpha": false,
+   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "source": "Art/Textures/Arena/T_StonePaver_N.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_StonePaver_R": {
+   "path": "assets/textures/arena/T_StonePaver_R.webp",
+   "bytes": 35340,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "linear",
+   "kind": "roughness",
+   "channels": {
+    "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
+   },
+   "alpha": false,
+   "encoding": "lossy WebP q85",
+   "source": "Art/Textures/Arena/T_StonePaver_R.png",
+   "sourceSize": [
+    2048,
+    2048
+   ]
+  },
+  "T_SynthSun": {
+   "path": "assets/textures/arena/T_SynthSun.webp",
+   "bytes": 39796,
+   "width": 1024,
+   "height": 1024,
+   "colorSpace": "srgb",
+   "kind": "color",
+   "channels": {
+    "rgb": "premultiplied colour (sRGB)",
+    "a": "coverage (linear)"
+   },
+   "alpha": true,
+   "encoding": "lossy WebP q85 + lossless alpha",
+   "source": "Art/Textures/Arena/T_SynthSun.png",
+   "sourceSize": [
+    1024,
+    1024
+   ],
+   "notes": "RGB premultiplied on black: use RGB additive/emissive, or alpha for translucency."
+  }
+ },
+ "audio": {
+  "AMB_Room": {
+   "path": "assets/audio/AMB_Room.mp3",
+   "bytes": 641192,
+   "duration": 40.0,
+   "sampleRate": 44100,
+   "frames": 1764000,
+   "channels": 1,
+   "loop": true,
+   "loopStart": 0.0,
+   "loopEnd": 40.0,
+   "kind": "ambience",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/AMB_Room.wav"
+  },
+  "MUS_Ringtone": {
+   "path": "assets/audio/MUS_Ringtone.mp3",
+   "bytes": 165554,
+   "duration": 10.285691609977324,
+   "sampleRate": 44100,
+   "frames": 453599,
+   "channels": 1,
+   "loop": true,
+   "loopStart": 0.0,
+   "loopEnd": 10.285691609977324,
+   "kind": "music",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/MUS_Ringtone.wav"
+  },
+  "SFX_BonusAppear": {
+   "path": "assets/audio/SFX_BonusAppear.mp3",
+   "bytes": 4640,
+   "duration": 0.21,
+   "sampleRate": 44100,
+   "frames": 9261,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.21,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_BonusAppear.wav"
+  },
+  "SFX_BonusEat": {
+   "path": "assets/audio/SFX_BonusEat.mp3",
+   "bytes": 5058,
+   "duration": 0.24997732426303854,
+   "sampleRate": 44100,
+   "frames": 11024,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.24997732426303854,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_BonusEat.wav"
+  },
+  "SFX_Die": {
+   "path": "assets/audio/SFX_Die.mp3",
+   "bytes": 12163,
+   "duration": 0.7,
+   "sampleRate": 44100,
+   "frames": 30870,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.7,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_Die.wav"
+  },
+  "SFX_Eat": {
+   "path": "assets/audio/SFX_Eat.mp3",
+   "bytes": 2132,
+   "duration": 0.07,
+   "sampleRate": 44100,
+   "frames": 3087,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.07,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_Eat.wav"
+  },
+  "SFX_KeyClick": {
+   "path": "assets/audio/SFX_KeyClick.mp3",
+   "bytes": 1714,
+   "duration": 0.04,
+   "sampleRate": 44100,
+   "frames": 1764,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.04,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_KeyClick.wav"
+  },
+  "SFX_MenuMove": {
+   "path": "assets/audio/SFX_MenuMove.mp3",
+   "bytes": 1296,
+   "duration": 0.024988662131519273,
+   "sampleRate": 44100,
+   "frames": 1102,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.024988662131519273,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_MenuMove.wav"
+  },
+  "SFX_MenuSelect": {
+   "path": "assets/audio/SFX_MenuSelect.mp3",
+   "bytes": 2550,
+   "duration": 0.08997732426303855,
+   "sampleRate": 44100,
+   "frames": 3968,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.08997732426303855,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_MenuSelect.wav"
+  },
+  "SFX_Start": {
+   "path": "assets/audio/SFX_Start.mp3",
+   "bytes": 15507,
+   "duration": 0.9,
+   "sampleRate": 44100,
+   "frames": 39690,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.9,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_Start.wav"
+  },
+  "SFX_Vibrate": {
+   "path": "assets/audio/SFX_Vibrate.mp3",
+   "bytes": 20105,
+   "duration": 1.2,
+   "sampleRate": 44100,
+   "frames": 52920,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 1.2,
+   "kind": "sfx",
+   "group": "desk",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/SFX_Vibrate.wav"
+  },
+  "AMB_Wind": {
+   "path": "assets/audio/AMB_Wind.mp3",
+   "bytes": 801480,
+   "duration": 40.0,
+   "sampleRate": 44100,
+   "frames": 1764000,
+   "channels": 2,
+   "loop": true,
+   "loopStart": 0.0,
+   "loopEnd": 40.0,
+   "kind": "ambience",
+   "group": "arena",
+   "bitrateKbps": 160,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/AMB_Wind.wav"
+  },
+  "MUS_Era0": {
+   "path": "assets/audio/MUS_Era0.mp3",
+   "bytes": 641088,
+   "duration": 32.0,
+   "sampleRate": 44100,
+   "frames": 1411200,
+   "channels": 2,
+   "loop": true,
+   "loopStart": 0.0,
+   "loopEnd": 32.0,
+   "kind": "music",
+   "group": "arena",
+   "bitrateKbps": 160,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/MUS_Era0.wav"
+  },
+  "MUS_Era1": {
+   "path": "assets/audio/MUS_Era1.mp3",
+   "bytes": 641088,
+   "duration": 32.0,
+   "sampleRate": 44100,
+   "frames": 1411200,
+   "channels": 2,
+   "loop": true,
+   "loopStart": 0.0,
+   "loopEnd": 32.0,
+   "kind": "music",
+   "group": "arena",
+   "bitrateKbps": 160,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/MUS_Era1.wav"
+  },
+  "MUS_Era2": {
+   "path": "assets/audio/MUS_Era2.mp3",
+   "bytes": 641088,
+   "duration": 32.0,
+   "sampleRate": 44100,
+   "frames": 1411200,
+   "channels": 2,
+   "loop": true,
+   "loopStart": 0.0,
+   "loopEnd": 32.0,
+   "kind": "music",
+   "group": "arena",
+   "bitrateKbps": 160,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/MUS_Era2.wav"
+  },
+  "SFX_Arena_Bonus": {
+   "path": "assets/audio/SFX_Arena_Bonus.mp3",
+   "bytes": 13835,
+   "duration": 0.8,
+   "sampleRate": 44100,
+   "frames": 35280,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.8,
+   "kind": "sfx",
+   "group": "arena",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/SFX_Arena_Bonus.wav"
+  },
+  "SFX_Arena_Die": {
+   "path": "assets/audio/SFX_Arena_Die.mp3",
+   "bytes": 25120,
+   "duration": 1.5,
+   "sampleRate": 44100,
+   "frames": 66150,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 1.5,
+   "kind": "sfx",
+   "group": "arena",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/SFX_Arena_Die.wav"
+  },
+  "SFX_Arena_Eat": {
+   "path": "assets/audio/SFX_Arena_Eat.mp3",
+   "bytes": 6730,
+   "duration": 0.35,
+   "sampleRate": 44100,
+   "frames": 15435,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.35,
+   "kind": "sfx",
+   "group": "arena",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/SFX_Arena_Eat.wav"
+  },
+  "SFX_Arena_Turn": {
+   "path": "assets/audio/SFX_Arena_Turn.mp3",
+   "bytes": 3386,
+   "duration": 0.15,
+   "sampleRate": 44100,
+   "frames": 6615,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 0.15,
+   "kind": "sfx",
+   "group": "arena",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/SFX_Arena_Turn.wav"
+  },
+  "SFX_DiveIn": {
+   "path": "assets/audio/SFX_DiveIn.mp3",
+   "bytes": 29718,
+   "duration": 1.8,
+   "sampleRate": 44100,
+   "frames": 79380,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 1.8,
+   "kind": "sfx",
+   "group": "arena",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/SFX_DiveIn.wav"
+  },
+  "SFX_EraShift": {
+   "path": "assets/audio/SFX_EraShift.mp3",
+   "bytes": 65244,
+   "duration": 4.0,
+   "sampleRate": 44100,
+   "frames": 176400,
+   "channels": 1,
+   "loop": false,
+   "loopStart": 0.0,
+   "loopEnd": 4.0,
+   "kind": "sfx",
+   "group": "arena",
+   "bitrateKbps": 128,
+   "mp3PrimingSeconds": 0.025057,
+   "source": "Art/Audio/Arena/SFX_EraShift.wav"
+  }
+ },
+ "fonts": {
+  "Inter-SemiBold": {
+   "path": "assets/fonts/Inter-SemiBold.woff2",
+   "bytes": 144360,
+   "family": "Inter",
+   "weight": 600,
+   "style": "normal",
+   "subfamily": "SemiBold",
+   "license": "assets/fonts/OFL_Inter.txt",
+   "source": "Art/Fonts/Inter-SemiBold.ttf",
+   "licenseBytes": 4380
+  },
+  "Orbitron-Black": {
+   "path": "assets/fonts/Orbitron-Black.woff2",
+   "bytes": 16972,
+   "family": "Orbitron",
+   "weight": 900,
+   "style": "normal",
+   "subfamily": "Black",
+   "license": "assets/fonts/OFL_Orbitron.txt",
+   "source": "Art/Fonts/Orbitron-Black.ttf",
+   "licenseBytes": 4434
+  },
+  "Orbitron-Bold": {
+   "path": "assets/fonts/Orbitron-Bold.woff2",
+   "bytes": 17612,
+   "family": "Orbitron",
+   "weight": 700,
+   "style": "normal",
+   "subfamily": "Bold",
+   "license": "assets/fonts/OFL_Orbitron.txt",
+   "source": "Art/Fonts/Orbitron-Bold.ttf",
+   "licenseBytes": 4434
+  },
+  "RetroSnakeLCD": {
+   "path": "assets/fonts/RetroSnakeLCD.woff2",
+   "bytes": 1528,
+   "family": "RetroSnake LCD",
+   "weight": 400,
+   "style": "normal",
+   "subfamily": "Regular",
+   "license": "project-owned (RetroSnake)",
+   "source": "Art/Fonts/RetroSnakeLCD.ttf"
+  }
+ },
+ "bytesByCategory": {
+  "models": 11996816,
+  "textures": 21842896,
+  "audio": 3740688,
+  "fonts": 189286
+ },
+ "totalBytes": 37769686,
+ "budget": {
+  "targetBytes": 40000000,
+  "withinBudget": true,
+  "note": "totalBytes = every file under Web/public/assets except manifest.json itself (incl. font licences)"
+ }
+}
