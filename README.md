@@ -1,6 +1,6 @@
 # RetroSnake Classic for iPhone
 
-A separate, offline iPhone app built from RetroSnake's original TypeScript 3D game source. It opens directly in the 2001 voxel arena with the overhead Classic camera. A loss shows the score and a **Play Again** button; another run begins in the same voxel world. Touch swipes steer, and the native shell adds light haptic feedback. The website game is a separate project and is not built or modified here.
+A separate, offline iPhone app built from RetroSnake's original TypeScript 3D game source. It opens into Classic Snake on the LCD of the 3D phone, matching the experience shown at `scaffolde.ai/snake` in T3 Code Nightly. Touch swipes steer, the phone menu exposes the classic level and maze options, and the native shell adds light haptic feedback. The website game is a separate project and is not built or modified here.
 
 ## Project layout
 
@@ -13,7 +13,7 @@ A separate, offline iPhone app built from RetroSnake's original TypeScript 3D ga
 
 ## Build
 
-Requires Bun, XcodeGen, and full Xcode with an iOS SDK. On this Mac, Bun and XcodeGen are available; full Xcode is still missing.
+Requires Bun, XcodeGen, and full Xcode with an iOS SDK. All are installed on this Mac.
 
 ```sh
 cd '/Users/gary/Projects/RetroSnake Classic iOS'
@@ -30,18 +30,20 @@ The app target supports iPhone portrait on iOS 17 or later. Its custom `retrosna
 
 - `bun run test`: 51 game and touch-input tests passed.
 - `bun run build`: TypeScript and Vite production build passed.
-- `bun scripts/qa-mobile.mjs`: mobile WebKit browser displayed the voxel arena, reached Game Over, and started another voxel run with no page errors.
-- A macOS WKWebView harness loaded the packaged game through the same custom URL scheme and found the arena without script errors.
+- Earlier browser QA exercised the voxel arena before the principal clarified the intended Classic LCD experience. It does not verify the current app flow.
+- The current app was built with Xcode and launched on an iPhone 17 Pro iOS 26.5 Simulator. A simulator screenshot showed the textured desk, modeled phone, glowing key labels, and Classic LCD board. The first simulator run used fallback meshes because WebKit reported status `0` for the bundled asset manifest; `Assets.load` now accepts that valid local response.
+- Phone-sized Chrome play showed the Classic LCD game, its phone menu and maze selection, Game Over after a bounded-maze wall collision, and the retry transition into another LCD run.
+- Independent review found an arena-only VIEW setting still visible in the phone menu. It was removed; Chrome then showed only SOUND, GFX, SCREEN, and BACK in settings.
 - Independent review found a multi-finger steering interruption; the app copy now keeps the active swipe until its own pointer ends. It also reloads after WebKit evicts the content process.
-- `xcodegen generate`, `plutil -lint`, Swift syntax parse, and a macOS typecheck of the scheme handler passed.
+- `xcodegen generate`, `plutil -lint`, and the iOS Simulator build passed.
 - Every path in the asset manifest exists in the packaged game directory.
 
-These checks do not prove an iPhone build, on-device graphics/audio/haptics, code signing, TestFlight, or App Store acceptance. Those are the next gates after full Xcode is installed.
+The simulator launch does not prove physical iPhone graphics/audio/haptics, code signing, TestFlight, or App Store acceptance. Xcode still does not list a physical iPhone, so the required device playtest is open.
 
 ## App Store route
 
-1. Build and play on a real iPhone. Check launch, WebGL rendering, swipes, camera, pause, Game Over, retry, haptics, audio, airplane mode, and returning from the background.
-2. Capture actual iPhone screenshots and finalize the store name, description, category, age rating, support URL, and public privacy policy URL. Review the drafts in `store/`.
+1. Build and play on a real iPhone. Check launch, LCD rendering and phone appearance, swipes, menu, Game Over, retry, haptics, audio, airplane mode, and returning from the background.
+2. Capture actual iPhone screenshots and finalize the store name, description, category, age rating, support URL, and public privacy policy URL. Review the drafts in `store/`. The support and privacy pages are prepared in [website PR #18](https://github.com/Scaffolde/scaffolde-website/pull/18), which has not been merged or deployed. Its GitHub build job had no steps and Vercel reported “Deployment was blocked”; neither is release verification.
 3. Create a distinct iOS app record in App Store Connect under the verified team and matching bundle ID.
 4. Archive and upload with Xcode, test through TestFlight, then submit the reviewed build and metadata to App Review.
 

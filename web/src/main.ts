@@ -7,6 +7,7 @@ import { newSession, parseFlags, type AppContext, type GameScene, type SceneFact
 import { loadSave, writeSave } from './game/SaveData';
 
 const factories: Record<SceneName, () => Promise<SceneFactory>> = {
+  desk: () => import('./desk/DeskScene').then((m) => m.createDeskScene),
   arena: () => import('./arena/ArenaScene').then((m) => m.createArenaScene),
 };
 
@@ -30,8 +31,6 @@ async function boot(): Promise<void> {
 
   const flags = parseFlags(location.search);
   const save = loadSave();
-  // This is a focused voxel game: the overhead Classic camera is the default.
-  save.classicCamera = true;
   const engine = await Engine.create(canvas, save.quality as Quality | undefined);
   const assets = await Assets.load(base);
   const audio = new Audio(assets.manifest, base);
@@ -95,7 +94,7 @@ async function boot(): Promise<void> {
   });
 
   status.textContent = 'LOADING';
-  await ctx.go('arena');
+  await ctx.go('desk');
   bar.style.width = '100%';
 
   // Browsers only allow sound after a gesture, so the first press both starts audio and the game.
@@ -116,6 +115,7 @@ async function boot(): Promise<void> {
   }
   void audio.unlock();
   loader.classList.add('gone');
+  if (!scripted) input.emit('select', engine.isMobile ? 'touch' : 'keyboard');
   setTimeout(() => loader.remove(), 800);
 }
 

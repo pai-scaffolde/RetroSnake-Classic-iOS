@@ -5,7 +5,7 @@ import type { Audio } from './Audio';
 import type { Action, Input, InputSource } from './Input';
 import type { SaveData } from '../game/SaveData';
 
-export type SceneName = 'arena';
+export type SceneName = 'desk' | 'arena';
 
 /** Hand-off between the desk and the arena (the Unreal build's GameInstance fields). */
 export interface Session {
@@ -23,7 +23,7 @@ export interface Session {
   lastAutopilot: boolean;
 }
 
-/** URL switches: ?scene=arena&maze=Mill&autoplay&demo&qa&webgl&fps */
+/** URL switches used for local QA and preview. */
 export interface Flags {
   scene: SceneName | null;
   maze: string | null;
@@ -67,7 +67,7 @@ export function parseFlags(search: string): Flags {
   const params = new URLSearchParams(search);
   const scene = params.get('scene');
   return {
-    scene: scene === 'arena' ? scene : null,
+    scene: scene === 'desk' || scene === 'arena' ? scene : null,
     maze: params.get('maze'),
     autoplay: params.has('autoplay'),
     demo: params.has('demo'),

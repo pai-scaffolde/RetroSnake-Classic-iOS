@@ -100,6 +100,20 @@ body {
 
 #loader.ready {
   cursor: pointer;
+  justify-content: flex-end;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  background: rgba(8, 12, 6, 0.28);
+}
+
+#loader.ready .logo {
+  display: none;
+}
+
+#loader.ready .status {
+  padding: 12px 20px;
+  border: 1px solid rgba(184, 217, 138, 0.6);
+  border-radius: 999px;
+  background: rgba(11, 15, 10, 0.85);
 }
 
 #loader.ready .status {

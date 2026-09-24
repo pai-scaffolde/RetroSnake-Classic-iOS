@@ -3,4 +3,5 @@ web/dist/
 ios/RetroSnakeClassic/GameAssets/
 ios/*.xcworkspace/xcuserdata/
 ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/xcuserdata/
 .DS_Store

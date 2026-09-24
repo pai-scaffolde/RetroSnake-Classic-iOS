@@ -59,7 +59,9 @@ export class Assets {
     let manifest: AssetManifest = {};
     try {
       const response = await fetch(baseUrl + 'assets/manifest.json', { cache: 'no-cache' });
-      if (response.ok) manifest = (await response.json()) as AssetManifest;
+      // WKURLSchemeHandler serves a URLResponse without an HTTP status, which
+      // WebKit exposes as status 0 even when the bundled JSON was delivered.
+      if (response.ok || response.status === 0) manifest = (await response.json()) as AssetManifest;
     } catch (error) {
       console.warn('asset manifest missing; running on fallbacks', error);
     }

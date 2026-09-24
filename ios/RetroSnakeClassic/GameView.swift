@@ -32,13 +32,13 @@ struct GameView: UIViewRepresentable {
             webView.reload()
         }
 
-        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
-                     decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-            guard navigationAction.request.url?.scheme == "retrosnake" else {
-                decisionHandler(.cancel)
-                return
+        func webView(_ webView: WKWebView,
+                     decidePolicyFor navigationAction: WKNavigationAction) async -> WKNavigationActionPolicy {
+            guard let url = navigationAction.request.url,
+                  url.scheme == "retrosnake", url.host == "app" else {
+                return .cancel
             }
-            decisionHandler(.allow)
+            return .allow
         }
 
         func userContentController(_ userContentController: WKUserContentController,
