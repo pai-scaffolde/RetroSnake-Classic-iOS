@@ -6,7 +6,7 @@ principal_stated_goal: "Can I get the voxel experience Classic Snake game in Ret
 phase: verify
 progress: 3/5
 started: 2026-09-24T19:12:48Z
-updated: 2026-09-24T19:24:20Z
+updated: 2026-09-24T19:30:15Z
 sources:
   - /private/tmp/retrosnake-web-source.zip
   - /Users/gary/.t3/worktrees/Scaffolde Website/snake-scene-choice/public/snake/assets
@@ -68,7 +68,7 @@ Create a distinct iPhone app from RetroSnake's 3D voxel arena while preserving t
 ## Verification
 
 - ISC-1: `ios/RetroSnakeClassic.xcodeproj/project.pbxproj` passes `plutil -lint` and names a separate iPhone target with provisional bundle ID `ai.scaffolde.retrosnakeclassic`. The offline `GameAssets` folder reference is in Resources. Full Xcode is absent, so an iOS binary has not been built.
-- ISC-2: `bun run test` passed 49 tests, `bun run build` passed, mobile WebKit browser showed the 2001 voxel arena, Game Over, and retry into 2001 with no page errors. macOS WKWebView loaded the packaged custom scheme successfully. A signed iPhone run is open.
+- ISC-2: `bun run test` passed 51 tests, including the independent review's multi-finger steering regression, and `bun run build` passed. Mobile WebKit browser showed the 2001 voxel arena, Game Over, and retry into 2001 with no page errors. macOS WKWebView loaded the packaged custom scheme successfully. A signed iPhone run is open.
 - ISC-3: The app resides under `/Users/gary/Projects/RetroSnake Classic iOS`. The website checkout and its scene-choice worktree are clean after this task. The scene-choice worktree advanced to commit `23632a1` concurrently during this task; this project did not edit or deploy it, so its independently changed live behavior is not claimed here.
 - ISC-4: `store/APP_STORE_DRAFT.md` maps the available skills. Current Apple documentation confirms app record, build upload, TestFlight, privacy URL, screenshots, and review gates.
 - ISC-5: Original deliverables are addressed, but iPhone runtime proof for ISC-2 and the final completeness close remain open.

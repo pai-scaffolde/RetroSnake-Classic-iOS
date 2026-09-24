@@ -27,6 +27,11 @@ struct GameView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator() }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
+        func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+            // iOS may evict the renderer while the app is backgrounded. Reload the bundled game.
+            webView.reload()
+        }
+
         func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                      decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
             guard navigationAction.request.url?.scheme == "retrosnake" else {

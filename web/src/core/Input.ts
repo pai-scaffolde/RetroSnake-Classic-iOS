@@ -1,7 +1,6 @@
 /**
- * Keyboard, gamepad and touch mapped onto the phone's keypad vocabulary.
- * Scenes interpret actions: the desk uses them as menu keys, the arena as steering
- * (chase camera: left/right are relative turns; classic camera: absolute directions).
+ * Keyboard, gamepad and touch inputs for the voxel arena.
+ * The chase camera uses relative turns; the Classic camera uses absolute directions.
  */
 export type Action = 'up' | 'down' | 'left' | 'right' | 'select' | 'back' | 'camera' | 'pause';
 
@@ -44,7 +43,7 @@ export class Input {
     surface.addEventListener('pointerdown', this.onPointerDown);
     surface.addEventListener('pointermove', this.onPointerMove);
     surface.addEventListener('pointerup', this.onPointerUp);
-    surface.addEventListener('pointercancel', () => (this.touchStart = null));
+    surface.addEventListener('pointercancel', this.onPointerCancel);
   }
 
   on(handler: ActionHandler): () => void {
@@ -91,6 +90,7 @@ export class Input {
   private onPointerDown = (event: PointerEvent): void => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     if ((event.target as HTMLElement).closest('[data-ui]')) return;
+    if (this.touchStart) return;
     this.touchStart = { x: event.clientX, y: event.clientY, id: event.pointerId, time: performance.now(), fired: false };
   };
 
@@ -107,8 +107,9 @@ export class Input {
 
   private onPointerUp = (event: PointerEvent): void => {
     const start = this.touchStart;
+    if (!start || start.id !== event.pointerId) return;
     this.touchStart = null;
-    if (!start || start.id !== event.pointerId || start.fired) return;
+    if (start.fired) return;
     if (performance.now() - start.time > 600) return;
     const source = this.pointerSource(event);
     if (this.tapZones) {
@@ -116,6 +117,10 @@ export class Input {
     } else {
       this.emit('select', source);
     }
+  };
+
+  private onPointerCancel = (event: PointerEvent): void => {
+    if (this.touchStart?.id === event.pointerId) this.touchStart = null;
   };
 
   private pointerSource(event: PointerEvent): InputSource {

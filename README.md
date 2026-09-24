@@ -28,10 +28,11 @@ The app target supports iPhone portrait on iOS 17 or later. Its custom `retrosna
 
 ## Checks run on 2026-09-24
 
-- `bun run test`: 49 game tests passed.
+- `bun run test`: 51 game and touch-input tests passed.
 - `bun run build`: TypeScript and Vite production build passed.
 - `bun scripts/qa-mobile.mjs`: mobile WebKit browser displayed the voxel arena, reached Game Over, and started another voxel run with no page errors.
 - A macOS WKWebView harness loaded the packaged game through the same custom URL scheme and found the arena without script errors.
+- Independent review found a multi-finger steering interruption; the app copy now keeps the active swipe until its own pointer ends. It also reloads after WebKit evicts the content process.
 - `xcodegen generate`, `plutil -lint`, Swift syntax parse, and a macOS typecheck of the scheme handler passed.
 - Every path in the asset manifest exists in the packaged game directory.
 
