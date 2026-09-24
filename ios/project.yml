@@ -27,3 +27,12 @@ targets:
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: 65DX5RCLG7
         GENERATE_INFOPLIST_FILE: NO
+schemes:
+  RetroSnakeClassic:
+    build:
+      targets:
+        RetroSnakeClassic: all
+    run:
+      config: Debug
+    archive:
+      config: Release
