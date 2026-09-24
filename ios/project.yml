@@ -25,4 +25,5 @@ targets:
         INFOPLIST_FILE: RetroSnakeClassic/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 65DX5RCLG7
         GENERATE_INFOPLIST_FILE: NO

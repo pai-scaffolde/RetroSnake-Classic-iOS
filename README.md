@@ -8,6 +8,7 @@ A separate, offline iPhone app built from RetroSnake's original TypeScript 3D ga
 - `web/public/assets/` — self-contained game assets copied from the RetroSnake website checkout on 2026-09-24.
 - `ios/` — XcodeGen specification and SwiftUI/WebKit iPhone target.
 - `ios/RetroSnakeClassic/GameAssets/` — generated offline web bundle. Regenerate with the packaging script.
+- `ios/ci_scripts/ci_pre_xcodebuild.sh` — Xcode Cloud setup that installs locked web dependencies and creates the offline bundle in a fresh checkout.
 - `design/AppIcon.svg` — editable app icon source.
 - `store/` — draft listing and privacy text for review before publishing.
 
@@ -38,13 +39,14 @@ The app target supports iPhone portrait on iOS 17 or later. Its custom `retrosna
 - `xcodegen generate`, `plutil -lint`, and the iOS Simulator build passed.
 - Every path in the asset manifest exists in the packaged game directory.
 
-The simulator launch does not prove physical iPhone graphics/audio/haptics, code signing, TestFlight, or App Store acceptance. Xcode still does not list a physical iPhone, so the required device playtest is open.
+The simulator launch does not prove physical iPhone graphics/audio/haptics, code signing, TestFlight, or App Store acceptance. The principal waived the physical device playtest on 2026-09-24 and chose Xcode Cloud and TestFlight for the release path.
 
 ## App Store route
 
-1. Build and play on a real iPhone. Check launch, LCD rendering and phone appearance, swipes, menu, Game Over, retry, haptics, audio, airplane mode, and returning from the background.
-2. Capture actual iPhone screenshots and finalize the store name, description, category, age rating, support URL, and public privacy policy URL. Review the drafts in `store/`. The support and privacy pages are prepared in [website PR #18](https://github.com/Scaffolde/scaffolde-website/pull/18), which has not been merged or deployed. Its GitHub build job had no steps and Vercel reported “Deployment was blocked”; neither is release verification.
-3. Create a distinct iOS app record in App Store Connect under the verified team and matching bundle ID.
-4. Archive and upload with Xcode, test through TestFlight, then submit the reviewed build and metadata to App Review.
+1. Build from the committed Xcode project in Xcode Cloud. Its pre-build script installs the locked Bun dependencies and packages the offline game assets before Xcode copies resources.
+2. Run the app in Simulator and TestFlight. Check launch, LCD rendering and phone appearance, swipes, menu, Game Over, retry, audio, airplane mode, and returning from the background. Haptics need a device-based TestFlight report; the principal waived a local physical device playtest.
+3. Capture app screenshots and finalize the store name, description, category, age rating, support URL, and public privacy policy URL. Review the drafts in `store/`. The support and privacy pages are prepared in [website PR #18](https://github.com/Scaffolde/scaffolde-website/pull/18), which has not been merged or deployed. Its GitHub build job had no steps and Vercel reported “Deployment was blocked”; neither is release verification.
+4. Create a distinct iOS app record in App Store Connect under the verified team and matching bundle ID. Configure the Xcode Cloud workflow against the GitHub `main` branch.
+5. Distribute the signed build through TestFlight, then submit the reviewed build and metadata to App Review.
 
 Apple's [distribution preparation](https://developer.apple.com/documentation/Xcode/preparing-your-app-for-distribution), [build upload](https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds), [TestFlight](https://developer.apple.com/help/app-store-connect/test-a-beta-version/testflight-overview/), and [review submission](https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-app) guides govern those steps.
