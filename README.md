@@ -39,14 +39,14 @@ The app target supports iPhone portrait on iOS 17 or later. Its custom `retrosna
 - `xcodegen generate`, `plutil -lint`, and the iOS Simulator build passed.
 - Every path in the asset manifest exists in the packaged game directory.
 
-The simulator launch does not prove physical iPhone graphics/audio/haptics, code signing, TestFlight, or App Store acceptance. The principal waived the physical device playtest on 2026-09-24 and chose Xcode Cloud and TestFlight for the release path.
+The simulator launch does not prove physical iPhone graphics/audio/haptics, distribution signing, TestFlight, or App Store acceptance. The principal waived the physical device playtest on 2026-09-24 and chose TestFlight for the release path.
 
 ## App Store route
 
-1. Build from the committed Xcode project in Xcode Cloud. Its pre-build script installs the locked Bun dependencies and packages the offline game assets before Xcode copies resources.
+1. Build from the committed Xcode project. Xcode Cloud's pre-build script installs locked Bun dependencies and packages the offline game assets before Xcode copies resources. The Xcode Cloud workflow remains uncreated because Apple rejects the linked repository account's Admin permission despite the GitHub app being installed for this repository only. Local Apple Distribution signing is the fallback.
 2. Run the app in Simulator and TestFlight. Check launch, LCD rendering and phone appearance, swipes, menu, Game Over, retry, audio, airplane mode, and returning from the background. Haptics need a device-based TestFlight report; the principal waived a local physical device playtest.
-3. Capture app screenshots and finish the description, age rating, support URL, and public privacy policy URL. App Store Connect record `6815825906` has the saved name **Voxel Snake**, subtitle, and category. Review the drafts in `store/`. The support and privacy pages have a working Vercel preview in [website PR #18](https://github.com/Scaffolde/scaffolde-website/pull/18), but the PR has not been merged or deployed. Its GitHub Actions job cannot start because of an account billing or spending-limit issue.
-4. Configure the Xcode Cloud workflow against the GitHub `main` branch. The Xcode Cloud GitHub app is installed for this repository only; account linking must complete in the Chrome profile signed into GitHub as `pai-scaffolde` before workflow setup can proceed.
-5. Distribute the signed build through TestFlight, then submit the reviewed build and metadata to App Review.
+3. App Store Connect record `6815825906` has the saved name **Voxel Snake**, description, review contact, age rating, Free price, worldwide availability, and two genuine RGB iPhone Simulator screenshots. Finish the public privacy policy URL and copyright owner. Review the drafts in `store/`. The support and privacy pages have a working Vercel preview in [website PR #18](https://github.com/Scaffolde/scaffolde-website/pull/18), but the PR has not been merged or deployed. Its GitHub Actions job cannot start because of an account billing or spending-limit issue.
+4. An Apple Distribution certificate and `Voxel Snake App Store` provisioning profile for `ai.scaffolde.retrosnakeclassic` are installed on this Mac. Complete the signed archive and upload it to TestFlight. The first local archive is awaiting macOS Keychain approval for `codesign` to use the new private key.
+5. Test the distributed build through TestFlight, then submit the reviewed build and metadata to App Review.
 
 Apple's [distribution preparation](https://developer.apple.com/documentation/Xcode/preparing-your-app-for-distribution), [build upload](https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds), [TestFlight](https://developer.apple.com/help/app-store-connect/test-a-beta-version/testflight-overview/), and [review submission](https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-app) guides govern those steps.
