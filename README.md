@@ -1,6 +1,6 @@
-# RetroSnake Classic for iPhone
+# Voxel Snake for iPhone
 
-A separate, offline iPhone app built from RetroSnake's original TypeScript 3D game source. It opens into Classic Snake on the LCD of the 3D phone, matching the experience shown at `scaffolde.ai/snake` in T3 Code Nightly. Touch swipes steer, the phone menu exposes the classic level and maze options, and the native shell adds light haptic feedback. The website game is a separate project and is not built or modified here.
+Voxel Snake is a separate, offline iPhone app built from RetroSnake's original TypeScript 3D game source. It opens into Classic Snake on the LCD of the 3D phone, matching the experience shown at `scaffolde.ai/snake` in T3 Code Nightly. Touch swipes steer, the phone menu exposes the classic level and maze options, and the native shell adds light haptic feedback. The website game is a separate project and is not built or modified here.
 
 ## Project layout
 

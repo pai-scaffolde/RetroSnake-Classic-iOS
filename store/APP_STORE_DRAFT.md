@@ -1,17 +1,17 @@
 # App Store listing — prepared for App Store Connect
 
-- **Name:** RetroSnake Classic
+- **Name:** Voxel Snake
 - **Primary language:** English (U.S.)
 - **Platform:** iPhone only
-- **Category:** Games / Arcade
-- **Subtitle:** Snake on a retro phone
+- **Category:** Games / Casual, Action
+- **Subtitle:** Classic snake on a 3D phone
 - **Description:**
 
   Play Classic Snake on the glowing LCD of a 3D retro phone. Swipe to steer, collect food, and keep your run alive as the pace builds.
 
   The phone and its screen are the game. Play on the LCD, use the phone menu to choose a level or maze, and try to earn a place on the local top scores list.
 
-  RetroSnake Classic is built for focused, offline play. The game and its assets are included with the app, and your scores and settings stay on your iPhone.
+  Voxel Snake is built for focused, offline play. The game and its assets are included with the app, and your scores and settings stay on your iPhone.
 
 - **Keywords:** snake,arcade,offline,score,nostalgia,maze,retro
 - **In-app purchases / ads / accounts:** None implemented.
@@ -22,7 +22,7 @@
 - **Screenshots:** Capture from the final iPhone app; the browser QA screenshot is evidence, not store artwork.
 - **Copyright and contact phone:** Use the verified legal owner and a reachable App Review phone number from the developer account.
 
-The store name and bundle ID must be checked in App Store Connect before the first upload. The account owner reports paying the enrollment fee. Apple's developer account still displays **Gary Noonan (Pending)** and says the purchase may take up to 48 hours to process; an active team and name availability remain unverified.
+App Store Connect has an iOS app record for **Voxel Snake** (Apple ID `6815825906`) under Gary Noonan's active team, using bundle ID `ai.scaffolde.retrosnakeclassic`. The original proposed name, **RetroSnake Classic**, was unavailable. The public support/privacy pages and a signed build remain release gates.
 
 ## Available skills
 

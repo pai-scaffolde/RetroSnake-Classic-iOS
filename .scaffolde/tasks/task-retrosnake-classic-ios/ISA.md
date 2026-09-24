@@ -1,6 +1,6 @@
 ---
 artifact: isa
-task: "Standalone RetroSnake Classic LCD iPhone app"
+task: "Standalone Voxel Snake Classic LCD iPhone app"
 slug: retrosnake-classic-ios
 principal_stated_goal: "Can I get the voxel experience Classic Snake game in RetroSnake created as it's own discrete experience. I want to leave the existing experience intact, i just think the voxel experience is something that we can create as a distinct iphone app! What skills do we have that can help us publish this to the app store? My apple developer account is under garynoonan@me.com"
 phase: verify
@@ -67,6 +67,7 @@ Anti-claim: a local Simulator build or the earlier voxel-arena playtest does not
 - 2026-09-24: The principal initially selected the 3D voxel arena, then explicitly corrected the requested standalone experience to the Classic game visible in T3 Code Nightly's browser. The later clarification controls: Classic Snake on the 3D phone LCD.
 - 2026-09-24: The project is a separate directory; the website's compiled game and deployment are source evidence, not the app's mutable runtime.
 - 2026-09-24: The principal waived the local physical device test after creating an Xcode Cloud environment. Simulator and TestFlight are the remaining runtime routes.
+- 2026-09-24: The principal confirmed the Classic Snake game on the 3D phone LCD and chose **Voxel Snake** as the App Store title. The Xcode target and bundle ID retain their internal RetroSnake Classic identity.
 
 ## Verification
 
@@ -74,4 +75,4 @@ Anti-claim: a local Simulator build or the earlier voxel-arena playtest does not
 - ISC-2: `bun run test` passed 51 tests and `bun run build` passed. The simulator displays the original textured desk, modeled phone, glowing key labels, and Classic Snake LCD board. The first simulator run used fallback models because WebKit exposes the custom-scheme manifest as status `0`; accepting and parsing that response restored the assets. Chrome rendered the phone scene at phone width, entered LCD Snake, opened the phone menu, selected the Box maze, reached Game Over on a wall collision, and showed a new LCD run on retry. Simulator touch input, audio, haptics, and a physical iPhone run are still open. The earlier arena playtest does not count for this revised criterion.
 - ISC-3: The app resides under `/Users/gary/Projects/RetroSnake Classic iOS`. The website checkout and its scene-choice worktree are clean after this task. The scene-choice worktree advanced to commit `23632a1` concurrently during this task; this project did not edit or deploy it, so its independently changed live behavior is not claimed here.
 - ISC-4: `store/APP_STORE_DRAFT.md` maps the available skills. Current Apple documentation confirms app record, build upload, TestFlight, privacy URL, screenshots, and review gates. Website PR #18 stages the support/privacy pages without changing `/snake`; local Chrome navigation between them passed. The PR is a draft, not a live public URL. Its GitHub build job ended before any steps and Vercel reported “Deployment was blocked.”
-- ISC-5: App Store Connect now opens under Gary Noonan and offers New App. Its Xcode Cloud module shows onboarding and no products or workflows yet. Public support/privacy URLs, signing, a cloud build, and TestFlight remain open. The physical iPhone probe is waived by the principal.
+- ISC-5: App Store Connect has a Voxel Snake iOS record (Apple ID `6815825906`) on Gary Noonan's active team and registered bundle ID `ai.scaffolde.retrosnakeclassic`. A fresh checkout ran the Xcode Cloud pre-build hook, generated the 43 MB offline GameAssets bundle, and passed an iPhone 17 Pro Simulator Release build with that bundle in the app. An independent review found the missing shared scheme; it is now generated from `ios/project.yml` and committed. GitHub main contains those changes. The Xcode Cloud GitHub app is installed on `pai-scaffolde` with access only to this repository. The initial Xcode workflow attempt used a Gary GitHub session without repository admin permission; continuing in the pai browser requires Apple sign-in. Public support/privacy URLs, signed Cloud build, and TestFlight remain open. The physical iPhone probe is waived by the principal.
