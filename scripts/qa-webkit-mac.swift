@@ -38,14 +38,24 @@ final class Probe: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
     func check(remaining: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.webView.evaluateJavaScript("""
-              ({ title: document.title, canvas: !!document.querySelector('#view'),
-                 arena: !!document.querySelector('.arena-hud.era-0'),
-                 loader: document.querySelector('#loader .status')?.textContent })
+              (() => {
+                const canvas = document.querySelector('#view');
+                const game = window.retrosnake;
+                return { title: document.title, desk: !!document.querySelector('.desk-hud'),
+                  quality: game?.engine.quality,
+                  ratio: canvas ? canvas.width / canvas.clientWidth : 0,
+                  expectedRatio: Math.min(window.devicePixelRatio, 3),
+                  loader: document.querySelector('#loader .status')?.textContent };
+              })()
             """) { value, error in
                 if let error { self.errors.append(error.localizedDescription) }
-                if let result = value as? [String: Any], result["arena"] as? Bool == true {
-                    print("PASS: \(result) errors=\(self.errors)")
-                    exit(self.errors.isEmpty ? 0 : 1)
+                if let result = value as? [String: Any], result["desk"] as? Bool == true {
+                    let quality = (result["quality"] as? NSNumber)?.intValue ?? -1
+                    let ratio = (result["ratio"] as? NSNumber)?.doubleValue ?? 0
+                    let expected = (result["expectedRatio"] as? NSNumber)?.doubleValue ?? -1
+                    let passed = quality == 3 && abs(ratio - expected) < 0.02 && self.errors.isEmpty
+                    print("\(passed ? "PASS" : "FAIL"): \(result) errors=\(self.errors)")
+                    exit(passed ? 0 : 1)
                 }
                 if remaining <= 1 {
                     print("FAIL: \(String(describing: value)) errors=\(self.errors)")

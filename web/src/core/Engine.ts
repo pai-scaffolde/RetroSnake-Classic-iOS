@@ -55,7 +55,11 @@ export class Engine {
     this.canvas = canvas;
     this.renderer = renderer;
     this.isMobile = matchMedia('(pointer: coarse)').matches || /Android|iPhone|iPad/i.test(navigator.userAgent);
-    this.quality = quality ?? (this.isMobile ? 1 : 2);
+    // The installed iPhone app is viewed on a Retina display. The website's
+    // mobile MED default renders at just 1.25x CSS size and looks blurred when
+    // WebKit stretches it to the device's 3x screen. Keep the web default,
+    // while giving the standalone app its full-resolution presentation.
+    this.quality = quality ?? (location.protocol === 'retrosnake:' ? 3 : this.isMobile ? 1 : 2);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.shadowMap.enabled = true;
@@ -164,7 +168,7 @@ export class Engine {
   private resize(): void {
     const width = this.canvas.clientWidth || window.innerWidth;
     const height = this.canvas.clientHeight || window.innerHeight;
-    const maxRatio = [1, 1.25, 1.75, 2][this.quality];
+    const maxRatio = [1, 1.5, 2, 3][this.quality];
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
     this.renderer.setSize(width, height, false);
     if (this.camera instanceof THREE.PerspectiveCamera) {
