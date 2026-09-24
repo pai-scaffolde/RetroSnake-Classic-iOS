@@ -1,34 +1,79 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="desk" x2="0" y2="1"><stop stop-color="#593926"/><stop offset="1" stop-color="#271b16"/></linearGradient>
-    <linearGradient id="body" x2="1" y2="1"><stop stop-color="#27302c"/><stop offset=".48" stop-color="#101716"/><stop offset="1" stop-color="#070c0c"/></linearGradient>
-    <linearGradient id="glass" x2="0" y2="1"><stop stop-color="#d0e696"/><stop offset="1" stop-color="#99b96c"/></linearGradient>
-    <filter id="shadow" x="-40%" y="-30%" width="180%" height="180%"><feGaussianBlur stdDeviation="28"/></filter>
-    <pattern id="lcd" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M14 0H0V14" fill="none" stroke="#52723b" stroke-opacity=".13" stroke-width="1"/></pattern>
+    <radialGradient id="backdrop" cx=".47" cy=".34" r=".78">
+      <stop stop-color="#47594b"/>
+      <stop offset=".56" stop-color="#25332e"/>
+      <stop offset="1" stop-color="#101817"/>
+    </radialGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#718477"/>
+      <stop offset=".36" stop-color="#1c2a26"/>
+      <stop offset=".76" stop-color="#080f0e"/>
+      <stop offset="1" stop-color="#40544a"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#293a32"/>
+      <stop offset=".42" stop-color="#18241f"/>
+      <stop offset="1" stop-color="#0d1613"/>
+    </linearGradient>
+    <radialGradient id="lcd" cx=".38" cy=".28" r=".84">
+      <stop stop-color="#e4ffab"/>
+      <stop offset=".58" stop-color="#b9ed78"/>
+      <stop offset="1" stop-color="#83be55"/>
+    </radialGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2=".8" y2="1">
+      <stop stop-color="#ffffff" stop-opacity=".32"/>
+      <stop offset=".32" stop-color="#ffffff" stop-opacity=".04"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="cast" x="-.3" y="-.3" width="1.6" height="1.7"><feGaussianBlur stdDeviation="35"/></filter>
+    <filter id="glow" x="-.3" y="-.3" width="1.6" height="1.6"><feGaussianBlur stdDeviation="25"/></filter>
+    <pattern id="pixels" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#294d2c" stroke-opacity=".1" stroke-width="2"/>
+    </pattern>
   </defs>
-  <rect width="1024" height="1024" fill="url(#desk)"/>
-  <path d="M0 175H1024M0 420H1024M0 665H1024M0 910H1024" stroke="#b97545" stroke-opacity=".14" stroke-width="12"/>
-  <ellipse cx="548" cy="884" rx="330" ry="90" fill="#050807" opacity=".8" filter="url(#shadow)"/>
-  <rect x="228" y="83" width="568" height="860" rx="122" fill="#050908" stroke="#344138" stroke-width="13"/>
-  <rect x="246" y="96" width="532" height="824" rx="104" fill="url(#body)"/>
-  <rect x="426" y="143" width="172" height="19" rx="9" fill="#050807"/>
-  <rect x="291" y="192" width="442" height="305" rx="23" fill="#070b09" stroke="#3a4d39" stroke-width="9"/>
-  <rect x="307" y="209" width="410" height="273" rx="7" fill="url(#glass)"/>
-  <rect x="307" y="209" width="410" height="273" rx="7" fill="url(#lcd)"/>
-  <path d="M336 252h350M336 252v192h350V252" fill="none" stroke="#243b1b" stroke-width="13" stroke-dasharray="17 5"/>
-  <path d="M398 369h155v-45h46" fill="none" stroke="#243b1b" stroke-width="23" stroke-dasharray="21 5"/>
-  <path d="M632 338v40m-20-20h40" fill="none" stroke="#243b1b" stroke-width="13"/>
-  <rect x="438" y="521" width="148" height="52" rx="26" fill="#4b5143" stroke="#1b251d" stroke-width="6"/>
-  <circle cx="512" cy="547" r="11" fill="#a1dc6a"/>
-  <g fill="#596052" stroke="#18211d" stroke-width="7">
-    <rect x="305" y="525" width="83" height="49" rx="20"/><rect x="636" y="525" width="83" height="49" rx="20"/>
-    <rect x="310" y="602" width="103" height="64" rx="26"/><rect x="460" y="602" width="103" height="64" rx="26"/><rect x="610" y="602" width="103" height="64" rx="26"/>
-    <rect x="310" y="697" width="103" height="64" rx="26"/><rect x="460" y="697" width="103" height="64" rx="26"/><rect x="610" y="697" width="103" height="64" rx="26"/>
-    <rect x="310" y="792" width="103" height="64" rx="26"/><rect x="460" y="792" width="103" height="64" rx="26"/><rect x="610" y="792" width="103" height="64" rx="26"/>
+  <rect width="1024" height="1024" fill="url(#backdrop)"/>
+  <circle cx="510" cy="410" r="390" fill="#b8e66e" opacity=".13" filter="url(#glow)"/>
+  <ellipse cx="542" cy="970" rx="405" ry="75" fill="#020706" opacity=".8" filter="url(#cast)"/>
+
+  <!-- The handset is close enough to read at App Store and Home Screen sizes. -->
+  <rect x="142" y="45" width="740" height="1080" rx="149" fill="#070d0b" stroke="url(#edge)" stroke-width="23"/>
+  <rect x="169" y="66" width="686" height="1031" rx="126" fill="url(#face)" stroke="#42574a" stroke-opacity=".65" stroke-width="7"/>
+  <path d="M214 149Q214 104 262 94" fill="none" stroke="#b8c9aa" stroke-opacity=".18" stroke-width="13" stroke-linecap="round"/>
+  <rect x="408" y="119" width="208" height="17" rx="9" fill="#07110c" stroke="#617765" stroke-opacity=".25" stroke-width="2"/>
+
+  <!-- Large illuminated LCD with an unmistakable block snake and food. -->
+  <rect x="209" y="187" width="606" height="584" rx="53" fill="#030807" stroke="#60775d" stroke-width="10"/>
+  <rect x="232" y="207" width="560" height="543" rx="32" fill="#17271b"/>
+  <rect x="245" y="220" width="534" height="517" rx="22" fill="url(#lcd)"/>
+  <rect x="245" y="220" width="534" height="517" rx="22" fill="url(#pixels)"/>
+  <path d="M266 242h492v472H266z" fill="none" stroke="#315b2d" stroke-opacity=".5" stroke-width="6"/>
+
+  <g fill="#234626">
+    <rect x="300" y="610" width="46" height="46" rx="5"/>
+    <rect x="350" y="610" width="46" height="46" rx="5"/>
+    <rect x="400" y="610" width="46" height="46" rx="5"/>
+    <rect x="450" y="610" width="46" height="46" rx="5"/>
+    <rect x="450" y="560" width="46" height="46" rx="5"/>
+    <rect x="450" y="510" width="46" height="46" rx="5"/>
+    <rect x="500" y="510" width="46" height="46" rx="5"/>
+    <rect x="550" y="510" width="46" height="46" rx="5"/>
+    <rect x="550" y="460" width="46" height="46" rx="5"/>
+    <rect x="550" y="410" width="46" height="46" rx="5"/>
+    <rect x="600" y="410" width="46" height="46" rx="5"/>
   </g>
-  <g fill="#b2dc7a" font-family="system-ui,sans-serif" font-size="34" font-weight="700" text-anchor="middle">
-    <text x="357" y="647">1</text><text x="512" y="647">2</text><text x="662" y="647">3</text>
-    <text x="357" y="742">4</text><text x="512" y="742">5</text><text x="662" y="742">6</text>
-    <text x="357" y="837">7</text><text x="512" y="837">8</text><text x="662" y="837">9</text>
-  </g>
+  <rect x="650" y="406" width="55" height="54" rx="8" fill="#15381f"/>
+  <rect x="680" y="419" width="6" height="7" rx="1" fill="#d8ff91"/>
+  <rect x="332" y="331" width="42" height="42" rx="6" fill="#e45b38"/>
+  <rect x="338" y="336" width="14" height="10" rx="3" fill="#ffb073" opacity=".9"/>
+  <path d="M245 242Q440 184 725 266L598 520Q375 466 245 570z" fill="url(#glass)" opacity=".42"/>
+
+  <!-- Just enough physical keys to make the LCD read as a playable phone. -->
+  <rect x="283" y="806" width="133" height="73" rx="31" fill="#425549" stroke="#718271" stroke-width="4"/>
+  <rect x="446" y="800" width="132" height="83" rx="39" fill="#9ecf67" stroke="#c4e58f" stroke-width="5"/>
+  <rect x="608" y="806" width="133" height="73" rx="31" fill="#425549" stroke="#718271" stroke-width="4"/>
+  <circle cx="512" cy="841" r="17" fill="#243e26"/>
+  <rect x="295" y="917" width="111" height="69" rx="25" fill="#35463c" stroke="#5f7461" stroke-width="4"/>
+  <rect x="456" y="917" width="111" height="69" rx="25" fill="#35463c" stroke="#5f7461" stroke-width="4"/>
+  <rect x="617" y="917" width="111" height="69" rx="25" fill="#35463c" stroke="#5f7461" stroke-width="4"/>
 </svg>
