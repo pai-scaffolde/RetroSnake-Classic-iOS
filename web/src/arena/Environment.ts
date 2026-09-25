@@ -142,6 +142,14 @@ export class Environment {
     this.skyDome.position.copy(cameraPos);
   }
 
+  setOverhead(classic: boolean, dt: number): void {
+    const target = classic && this.engine.aspect < 0.8 && this.envEra < 0.5 ? 1 : 0;
+    const current = this.sky.overhead.value as number;
+    const next = current + (target - current) * Math.min(1, dt * 5);
+    this.sky.overhead.value = next;
+    this.materials.overhead.value = next;
+  }
+
   update(dt: number): void {
     ++this.framesSinceCapture;
     if (this.envEra !== this.targetEra) {

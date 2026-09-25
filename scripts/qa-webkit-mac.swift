@@ -41,7 +41,7 @@ final class Probe: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
               (() => {
                 const canvas = document.querySelector('#view');
                 const game = window.retrosnake;
-                return { title: document.title, desk: !!document.querySelector('.desk-hud'),
+                return { title: document.title, arena: !!document.querySelector('.arena-hud.era-0'),
                   quality: game?.engine.quality,
                   ratio: canvas ? canvas.width / canvas.clientWidth : 0,
                   expectedRatio: Math.min(window.devicePixelRatio, 3),
@@ -49,7 +49,7 @@ final class Probe: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
               })()
             """) { value, error in
                 if let error { self.errors.append(error.localizedDescription) }
-                if let result = value as? [String: Any], result["desk"] as? Bool == true {
+                if let result = value as? [String: Any], result["arena"] as? Bool == true {
                     let quality = (result["quality"] as? NSNumber)?.intValue ?? -1
                     let ratio = (result["ratio"] as? NSNumber)?.doubleValue ?? 0
                     let expected = (result["expectedRatio"] as? NSNumber)?.doubleValue ?? -1

@@ -8,6 +8,22 @@ struct GameView: UIViewRepresentable {
         configuration.allowsInlineMediaPlayback = true
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         configuration.userContentController.add(context.coordinator, name: "haptics")
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("--qa-autostart") {
+            configuration.userContentController.addUserScript(WKUserScript(source: """
+                (() => {
+                  const observer = new MutationObserver(() => {
+                    const loader = document.querySelector('#loader.ready');
+                    if (loader) {
+                      observer.disconnect();
+                      loader.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerType: 'touch' }));
+                    }
+                  });
+                  observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+                })();
+            """, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
+        }
+        #endif
 
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = context.coordinator
@@ -18,7 +34,14 @@ struct GameView: UIViewRepresentable {
         #if DEBUG
         webView.isInspectable = true
         #endif
-        webView.load(URLRequest(url: URL(string: "retrosnake://app/index.html")!))
+        #if DEBUG
+        let url = ProcessInfo.processInfo.arguments.contains("--qa-autostart")
+            ? "retrosnake://app/index.html?autoplay"
+            : "retrosnake://app/index.html"
+        #else
+        let url = "retrosnake://app/index.html"
+        #endif
+        webView.load(URLRequest(url: URL(string: url)!))
         return webView
     }
 

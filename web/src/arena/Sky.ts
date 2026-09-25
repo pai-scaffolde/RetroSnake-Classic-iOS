@@ -33,10 +33,12 @@ export interface SkyParams {
   sunDir: UVec3;
   /** Extra drop of the Future neon floor (m) as it rises into view. */
   gridDrop: UFloat;
+  /** The portrait overhead camera looks down into the otherwise dark lower sky. */
+  overhead: UFloat;
 }
 
 export function createSkyParams(): SkyParams {
-  return { era: uFloat(0), sunDir: uVec3(new THREE.Vector3(0, 0.2, -1).normalize()), gridDrop: uFloat(0) };
+  return { era: uFloat(0), sunDir: uVec3(new THREE.Vector3(0, 0.2, -1).normalize()), gridDrop: uFloat(0), overhead: uFloat(0) };
 }
 
 interface SkyTextures {
@@ -62,7 +64,7 @@ export function createSkyMaterial(params: SkyParams, tex: SkyTextures, detail: n
 
   // ---- Era 0: the phone's backlight, a gentle glow brightest on the horizon, with a faint giant dot matrix.
   const glow = pow(float(1).sub(smoothstep(0.0, 0.45, abs(el))), 1.8);
-  const c0 = mix(color('#34501A'), color('#C2E272'), glow);
+  const c0 = mix(mix(color('#34501A'), color('#729655'), params.overhead), color('#C2E272'), glow);
 
   // ---- Future: synthwave dusk.
   const horizon = color('#FF3D9A');

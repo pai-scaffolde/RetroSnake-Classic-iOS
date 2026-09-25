@@ -6,7 +6,7 @@ import { nativeHaptic } from '../core/NativeHaptics';
 import { ESnakeDir, ESnakeMaze, SnakeEvents, SnakeGame, type IntPoint } from '../game';
 import { Board } from './Board';
 import { CameraRig } from './CameraRig';
-import { BacklightGreen, IntroSeconds, NumEras, cellX, cellZ } from './constants';
+import { BacklightGreen, EraThresholds, IntroSeconds, NumEras, cellX, cellZ } from './constants';
 import { Dressing } from './Dressing';
 import { Environment } from './Environment';
 import { Hud, type HudState, type Popup } from './Hud';
@@ -36,6 +36,8 @@ const Cues = [
 const Tour: [number, string][] = [
   [9.0, 'camera'],
   [12.0, 'camera'],
+  [14.0, 'era1'],
+  [23.0, 'era2'],
   [33.0, 'camera'],
   [36.5, 'camera'],
   [41.0, 'die'],
@@ -78,6 +80,7 @@ class ArenaScene implements GameScene {
   private steps = 0;
   private vacated: IntPoint | null = null;
   private era = 0;
+  private foodAtLastEraShift = 0;
   private bannerTime = -100;
   private slowMoUntil = 0;
   private classic = false;
@@ -118,7 +121,9 @@ class ArenaScene implements GameScene {
   async load(): Promise<void> {
     const { assets, audio, flags, save, session } = this.ctx;
     const q = this.quality;
-    this.models = new Models(assets, q >= 2 ? 1 : 2);
+    // EPIC uses the authored meshes. HIGH keeps the first simplified LOD;
+    // lower tiers use the phone LODs to bound geometry cost.
+    this.models = new Models(assets, q >= 3 ? 0 : q >= 2 ? 1 : 2);
     this.noise = createNoiseTexture(q >= 2 ? 256 : 128);
     // Start and track all texture downloads before materials request their live Texture objects.
     const texturesReady = assets.preload([], ArenaTextures);
@@ -421,13 +426,16 @@ class ArenaScene implements GameScene {
   }
 
   private checkTransitionItem(): void {
-    // Era portals belong to the original multi-era website game.
+    if (this.era >= NumEras - 1 || this.game.isTransitionActive()) return;
+    if (this.game.getFoodEaten() - this.foodAtLastEraShift < EraThresholds[this.era + 1]) return;
+    if (this.game.spawnTransition()) this.ctx.audio.play('SFX_BonusAppear', { volume: 0.8 });
   }
 
   private shiftToEra(era: number): void {
     era = Math.min(NumEras - 1, Math.max(0, era));
     if (era === this.era) return;
     this.game.clearTransition();
+    this.foodAtLastEraShift = this.game.getFoodEaten();
     const head = this.game.getHead();
     this.board.startShift(era, head.x, head.y);
     this.env.startShift(era);
@@ -543,7 +551,8 @@ class ArenaScene implements GameScene {
       default:
         break;
     }
-    if (this.scripted) this.tickTour();
+    // QA controls each era explicitly; only the demo follows the timed tour.
+    if (this.ctx.flags.demo) this.tickTour();
     this.frame(realDelta, gameDelta);
   }
 
@@ -553,6 +562,8 @@ class ArenaScene implements GameScene {
     while (this.tourStep < Tour.length && t >= Tour[this.tourStep][0]) {
       const action = Tour[this.tourStep++][1];
       if (action === 'camera') this.toggleCamera();
+      else if (action === 'era1') this.shiftToEra(1);
+      else if (action === 'era2') this.shiftToEra(2);
       else if (action === 'die' && this.state === 'playing') this.enterState('dying');
     }
   }
@@ -583,6 +594,7 @@ class ArenaScene implements GameScene {
       realDelta,
     );
     this.env.follow(this.camera.position);
+    this.env.setOverhead(this.classic, realDelta);
     this.updateHud(realDelta);
   }
 
@@ -611,7 +623,7 @@ class ArenaScene implements GameScene {
     state.combo = g.getCombo();
     state.comboRemaining = g.getComboRemaining();
     state.bonus = g.isBonusActive();
-    state.transitionTarget = null;
+    state.transitionTarget = this.state === 'playing' && g.isTransitionActive() ? this.era + 1 : null;
     state.bonusTimer = g.getBonusTimer();
     state.demo = this.autopilot;
     state.state = this.state === 'warmup' ? 'wait' : this.state;

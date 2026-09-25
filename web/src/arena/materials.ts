@@ -61,6 +61,7 @@ export class ArenaMaterials {
   readonly baseColor: UColor = uColor(new THREE.Color('#10160A'));
   readonly sunDir: UVec3 = uVec3(new THREE.Vector3(0, 1, 0));
   readonly sunBoost: UFloat = uFloat(0);
+  readonly overhead: UFloat = uFloat(0);
 
   readonly tileTop: THREE.NodeMaterial[];
   readonly tileSides: THREE.NodeMaterial;
@@ -180,16 +181,19 @@ export class ArenaMaterials {
     const raw = t ? texture(t, uv()).rgb : vec3(Palette.lcd.r, Palette.lcd.g, Palette.lcd.b);
     // A touch more saturation: the backlight is a strong yellow-green, not a pale wash.
     const base = mix(vec3(dot(raw, vec3(0.2126, 0.7152, 0.0722))), raw, 1.35).max(0);
+    const litBase = mix(base, color('#DAEFA9'), this.overhead.mul(0.4));
     const vary = hash(instanceIndex).sub(0.5).mul(0.07).add(1);
     // An LED hotspot along one edge (the texture's V=1 edge), like the phone's backlight bleeding in.
     // The dot matrix: every tile is 4 x 4 LCD pixels with thin darker gutters, and the backlight is
     // brightest in the pixel centres, so the floor reads as a lit phone screen rather than flat paint.
     const cell = fract(uv().mul(4)).sub(0.5).abs();
-    const gutter = smoothstep(0.4, 0.48, max(cell.x, cell.y));
-    const pixel = float(1).sub(gutter.mul(0.28));
-    const centre = float(1).sub(length(cell).mul(0.35));
-    m.colorNode = base.mul(0.5).mul(pixel);
-    m.emissiveNode = base.mul(vary).mul(0.46).mul(pixel).mul(centre).add(this.seamGlow(uv()));
+    const gutter = smoothstep(0.39, 0.48, max(cell.x, cell.y));
+    const pixel = float(1).sub(gutter.mul(mix(0.38, 0.12, this.overhead)));
+    const centre = float(1).sub(length(cell).mul(mix(0.35, 0.12, this.overhead)));
+    const tileEdge = smoothstep(0.40, 0.50, max(abs(uv().x.sub(0.5)), abs(uv().y.sub(0.5))));
+    const bezel = float(1).sub(tileEdge.mul(mix(0.82, 0.25, this.overhead)));
+    m.colorNode = litBase.mul(mix(0.68, 0.78, this.overhead)).mul(pixel).mul(bezel);
+    m.emissiveNode = litBase.mul(vary).mul(mix(0.22, 0.25, this.overhead)).mul(pixel).mul(centre).mul(bezel).add(this.seamGlow(uv()));
     return m;
   }
 

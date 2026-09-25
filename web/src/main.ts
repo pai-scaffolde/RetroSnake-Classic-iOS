@@ -94,7 +94,9 @@ async function boot(): Promise<void> {
   });
 
   status.textContent = 'LOADING';
-  await ctx.go('desk');
+  // The standalone iPhone app opens in the full voxel arena. Keep the website
+  // preview's desk default and its explicit scene switch for browser QA.
+  await ctx.go(location.protocol === 'retrosnake:' ? 'arena' : flags.scene ?? 'desk');
   bar.style.width = '100%';
 
   // Browsers only allow sound after a gesture, so the first press both starts audio and the game.

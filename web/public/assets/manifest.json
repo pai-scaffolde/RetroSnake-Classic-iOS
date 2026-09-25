@@ -3770,8 +3770,8 @@
    ]
   },
   "T_FruitSkin_D": {
-   "path": "assets/textures/arena/T_FruitSkin_D.webp",
-   "bytes": 198014,
+   "path": "assets/textures/arena/T_FruitSkin_D.png",
+   "bytes": 1831678,
    "width": 1024,
    "height": 1024,
    "colorSpace": "srgb",
@@ -3780,7 +3780,7 @@
     "rgb": "colour (sRGB)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_FruitSkin_D.png",
    "sourceSize": [
     1024,
@@ -3788,8 +3788,8 @@
    ]
   },
   "T_FruitSkin_N": {
-   "path": "assets/textures/arena/T_FruitSkin_N.webp",
-   "bytes": 293642,
+   "path": "assets/textures/arena/T_FruitSkin_N.png",
+   "bytes": 754305,
    "width": 1024,
    "height": 1024,
    "colorSpace": "linear",
@@ -3798,7 +3798,7 @@
     "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
    },
    "alpha": false,
-   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "encoding": "full-resolution lossless PNG; green flipped from DirectX source",
    "source": "Art/Textures/Arena/T_FruitSkin_N.png",
    "sourceSize": [
     1024,
@@ -3806,8 +3806,8 @@
    ]
   },
   "T_FruitSkin_R": {
-   "path": "assets/textures/arena/T_FruitSkin_R.webp",
-   "bytes": 199948,
+   "path": "assets/textures/arena/T_FruitSkin_R.png",
+   "bytes": 628542,
    "width": 1024,
    "height": 1024,
    "colorSpace": "linear",
@@ -3816,7 +3816,7 @@
     "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_FruitSkin_R.png",
    "sourceSize": [
     1024,
@@ -3824,17 +3824,17 @@
    ]
   },
   "T_Grass_AO": {
-   "path": "assets/textures/arena/T_Grass_AO.webp",
-   "bytes": 612340,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Grass_AO.png",
+   "bytes": 2956820,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "ao",
    "channels": {
     "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Grass_AO.png",
    "sourceSize": [
     2048,
@@ -3842,17 +3842,17 @@
    ]
   },
   "T_Grass_D": {
-   "path": "assets/textures/arena/T_Grass_D.webp",
-   "bytes": 459928,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Grass_D.png",
+   "bytes": 9255459,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "srgb",
    "kind": "color",
    "channels": {
     "rgb": "colour (sRGB)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Grass_D.png",
    "sourceSize": [
     2048,
@@ -3860,17 +3860,17 @@
    ]
   },
   "T_Grass_H": {
-   "path": "assets/textures/arena/T_Grass_H.webp",
-   "bytes": 511364,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Grass_H.png",
+   "bytes": 6808386,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "height",
    "channels": {
     "r=g=b": "height 0..1 (8-bit from the 16-bit source) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 16-bit PNG",
    "source": "Art/Textures/Arena/T_Grass_H.png",
    "sourceSize": [
     2048,
@@ -3878,17 +3878,17 @@
    ]
   },
   "T_Grass_N": {
-   "path": "assets/textures/arena/T_Grass_N.webp",
-   "bytes": 2152764,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Grass_N.png",
+   "bytes": 11646533,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "normal",
    "channels": {
     "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
    },
    "alpha": false,
-   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "encoding": "full-resolution lossless PNG; green flipped from DirectX source",
    "source": "Art/Textures/Arena/T_Grass_N.png",
    "sourceSize": [
     2048,
@@ -3896,17 +3896,17 @@
    ]
   },
   "T_Grass_R": {
-   "path": "assets/textures/arena/T_Grass_R.webp",
-   "bytes": 280212,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Grass_R.png",
+   "bytes": 2488575,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "roughness",
    "channels": {
     "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Grass_R.png",
    "sourceSize": [
     2048,
@@ -3914,8 +3914,8 @@
    ]
   },
   "T_GrassBlade": {
-   "path": "assets/textures/arena/T_GrassBlade.webp",
-   "bytes": 23104,
+   "path": "assets/textures/arena/T_GrassBlade.png",
+   "bytes": 203711,
    "width": 512,
    "height": 1024,
    "colorSpace": "srgb",
@@ -3925,7 +3925,7 @@
     "a": "coverage / alpha (linear)"
    },
    "alpha": true,
-   "encoding": "lossy WebP q85 + lossless alpha",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_GrassBlade.png",
    "sourceSize": [
     512,
@@ -3934,8 +3934,8 @@
    "notes": "Masked (alphaTest ~0.5), two-sided. RGB is bled under transparent texels (encoded with exact=True)."
   },
   "T_LCDTile": {
-   "path": "assets/textures/arena/T_LCDTile.webp",
-   "bytes": 3638,
+   "path": "assets/textures/arena/T_LCDTile.png",
+   "bytes": 220896,
    "width": 512,
    "height": 512,
    "colorSpace": "srgb",
@@ -3944,7 +3944,7 @@
     "rgb": "colour (sRGB)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_LCDTile.png",
    "sourceSize": [
     512,
@@ -3953,17 +3953,17 @@
    "notes": "MI_Tile_Era0 top, used as emissive x Glow; LED hotspot at the V=1 edge."
   },
   "T_Moss_AO": {
-   "path": "assets/textures/arena/T_Moss_AO.webp",
-   "bytes": 488438,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Moss_AO.png",
+   "bytes": 3690830,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "ao",
    "channels": {
     "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Moss_AO.png",
    "sourceSize": [
     2048,
@@ -3971,17 +3971,17 @@
    ]
   },
   "T_Moss_D": {
-   "path": "assets/textures/arena/T_Moss_D.webp",
-   "bytes": 291528,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Moss_D.png",
+   "bytes": 8695011,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "srgb",
    "kind": "color",
    "channels": {
     "rgb": "colour (sRGB)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Moss_D.png",
    "sourceSize": [
     2048,
@@ -3989,17 +3989,17 @@
    ]
   },
   "T_Moss_H": {
-   "path": "assets/textures/arena/T_Moss_H.webp",
-   "bytes": 303516,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Moss_H.png",
+   "bytes": 7877378,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "height",
    "channels": {
     "r=g=b": "height 0..1 (8-bit from the 16-bit source) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 16-bit PNG",
    "source": "Art/Textures/Arena/T_Moss_H.png",
    "sourceSize": [
     2048,
@@ -4007,17 +4007,17 @@
    ]
   },
   "T_Moss_N": {
-   "path": "assets/textures/arena/T_Moss_N.webp",
-   "bytes": 2112256,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Moss_N.png",
+   "bytes": 11865952,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "normal",
    "channels": {
     "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
    },
    "alpha": false,
-   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "encoding": "full-resolution lossless PNG; green flipped from DirectX source",
    "source": "Art/Textures/Arena/T_Moss_N.png",
    "sourceSize": [
     2048,
@@ -4025,17 +4025,17 @@
    ]
   },
   "T_Moss_R": {
-   "path": "assets/textures/arena/T_Moss_R.webp",
-   "bytes": 173166,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Moss_R.png",
+   "bytes": 3044192,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "roughness",
    "channels": {
     "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Moss_R.png",
    "sourceSize": [
     2048,
@@ -4043,8 +4043,8 @@
    ]
   },
   "T_NeonGrid": {
-   "path": "assets/textures/arena/T_NeonGrid.webp",
-   "bytes": 7978,
+   "path": "assets/textures/arena/T_NeonGrid.png",
+   "bytes": 22529,
    "width": 1024,
    "height": 1024,
    "colorSpace": "linear",
@@ -4055,7 +4055,7 @@
     "b": "minor 4x4 subdivision lines"
    },
    "alpha": false,
-   "encoding": "lossless WebP (packed channels)",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_NeonGrid.png",
    "sourceSize": [
     1024,
@@ -4064,17 +4064,17 @@
    "notes": "Packed mask, stored lossless so channels don't bleed."
   },
   "T_Rock_AO": {
-   "path": "assets/textures/arena/T_Rock_AO.webp",
-   "bytes": 378216,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Rock_AO.png",
+   "bytes": 2956955,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "ao",
    "channels": {
     "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Rock_AO.png",
    "sourceSize": [
     2048,
@@ -4082,17 +4082,17 @@
    ]
   },
   "T_Rock_D": {
-   "path": "assets/textures/arena/T_Rock_D.webp",
-   "bytes": 187706,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Rock_D.png",
+   "bytes": 5791227,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "srgb",
    "kind": "color",
    "channels": {
     "rgb": "colour (sRGB)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Rock_D.png",
    "sourceSize": [
     2048,
@@ -4100,17 +4100,17 @@
    ]
   },
   "T_Rock_H": {
-   "path": "assets/textures/arena/T_Rock_H.webp",
-   "bytes": 176932,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Rock_H.png",
+   "bytes": 7251095,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "height",
    "channels": {
     "r=g=b": "height 0..1 (8-bit from the 16-bit source) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 16-bit PNG",
    "source": "Art/Textures/Arena/T_Rock_H.png",
    "sourceSize": [
     2048,
@@ -4118,17 +4118,17 @@
    ]
   },
   "T_Rock_N": {
-   "path": "assets/textures/arena/T_Rock_N.webp",
-   "bytes": 2098724,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Rock_N.png",
+   "bytes": 10875134,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "normal",
    "channels": {
     "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
    },
    "alpha": false,
-   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "encoding": "full-resolution lossless PNG; green flipped from DirectX source",
    "source": "Art/Textures/Arena/T_Rock_N.png",
    "sourceSize": [
     2048,
@@ -4136,17 +4136,17 @@
    ]
   },
   "T_Rock_R": {
-   "path": "assets/textures/arena/T_Rock_R.webp",
-   "bytes": 168388,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_Rock_R.png",
+   "bytes": 1875131,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "roughness",
    "channels": {
     "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Rock_R.png",
    "sourceSize": [
     2048,
@@ -4154,8 +4154,8 @@
    ]
   },
   "T_Scarab_D": {
-   "path": "assets/textures/arena/T_Scarab_D.webp",
-   "bytes": 257820,
+   "path": "assets/textures/arena/T_Scarab_D.png",
+   "bytes": 1933055,
    "width": 1024,
    "height": 1024,
    "colorSpace": "srgb",
@@ -4164,7 +4164,7 @@
     "rgb": "colour (sRGB)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Scarab_D.png",
    "sourceSize": [
     1024,
@@ -4173,8 +4173,8 @@
    "notes": "Metallic F0 colour (metallic = 1)."
   },
   "T_Scarab_N": {
-   "path": "assets/textures/arena/T_Scarab_N.webp",
-   "bytes": 1829432,
+   "path": "assets/textures/arena/T_Scarab_N.png",
+   "bytes": 2655977,
    "width": 1024,
    "height": 1024,
    "colorSpace": "linear",
@@ -4183,7 +4183,7 @@
     "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
    },
    "alpha": false,
-   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "encoding": "full-resolution lossless PNG; green flipped from DirectX source",
    "source": "Art/Textures/Arena/T_Scarab_N.png",
    "sourceSize": [
     1024,
@@ -4191,8 +4191,8 @@
    ]
   },
   "T_Scarab_R": {
-   "path": "assets/textures/arena/T_Scarab_R.webp",
-   "bytes": 208990,
+   "path": "assets/textures/arena/T_Scarab_R.png",
+   "bytes": 634081,
    "width": 1024,
    "height": 1024,
    "colorSpace": "linear",
@@ -4201,7 +4201,7 @@
     "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_Scarab_R.png",
    "sourceSize": [
     1024,
@@ -4209,8 +4209,8 @@
    ]
   },
   "T_SnakeScales_AO": {
-   "path": "assets/textures/arena/T_SnakeScales_AO.webp",
-   "bytes": 356930,
+   "path": "assets/textures/arena/T_SnakeScales_AO.png",
+   "bytes": 1666120,
    "width": 2048,
    "height": 2048,
    "colorSpace": "linear",
@@ -4219,7 +4219,7 @@
     "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_SnakeScales_AO.png",
    "sourceSize": [
     2048,
@@ -4227,8 +4227,8 @@
    ]
   },
   "T_SnakeScales_D": {
-   "path": "assets/textures/arena/T_SnakeScales_D.webp",
-   "bytes": 264930,
+   "path": "assets/textures/arena/T_SnakeScales_D.png",
+   "bytes": 3208517,
    "width": 2048,
    "height": 2048,
    "colorSpace": "srgb",
@@ -4237,7 +4237,7 @@
     "rgb": "colour (sRGB)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_SnakeScales_D.png",
    "sourceSize": [
     2048,
@@ -4246,8 +4246,8 @@
    "notes": "U = along the body (24 scales/tile), V = around (48 rows); V 0/1 = belly scutes."
   },
   "T_SnakeScales_Iridescence": {
-   "path": "assets/textures/arena/T_SnakeScales_Iridescence.webp",
-   "bytes": 310554,
+   "path": "assets/textures/arena/T_SnakeScales_Iridescence.png",
+   "bytes": 1251572,
    "width": 2048,
    "height": 2048,
    "colorSpace": "linear",
@@ -4256,7 +4256,7 @@
     "r=g=b": "mask 0..1 (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_SnakeScales_Iridescence.png",
    "sourceSize": [
     2048,
@@ -4265,17 +4265,17 @@
    "notes": "Thin-film sheen weight (multiply a view-angle hue shift by it)."
   },
   "T_SnakeScales_N": {
-   "path": "assets/textures/arena/T_SnakeScales_N.webp",
-   "bytes": 1204092,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_SnakeScales_N.png",
+   "bytes": 7667870,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "normal",
    "channels": {
     "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
    },
    "alpha": false,
-   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "encoding": "full-resolution lossless PNG; green flipped from DirectX source",
    "source": "Art/Textures/Arena/T_SnakeScales_N.png",
    "sourceSize": [
     2048,
@@ -4283,8 +4283,8 @@
    ]
   },
   "T_SnakeScales_R": {
-   "path": "assets/textures/arena/T_SnakeScales_R.webp",
-   "bytes": 1087356,
+   "path": "assets/textures/arena/T_SnakeScales_R.png",
+   "bytes": 2861423,
    "width": 2048,
    "height": 2048,
    "colorSpace": "linear",
@@ -4293,7 +4293,7 @@
     "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_SnakeScales_R.png",
    "sourceSize": [
     2048,
@@ -4301,17 +4301,17 @@
    ]
   },
   "T_StonePaver_AO": {
-   "path": "assets/textures/arena/T_StonePaver_AO.webp",
-   "bytes": 126182,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_StonePaver_AO.png",
+   "bytes": 1506205,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "ao",
    "channels": {
     "r=g=b": "ambient occlusion (1 = unoccluded) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_StonePaver_AO.png",
    "sourceSize": [
     2048,
@@ -4319,17 +4319,17 @@
    ]
   },
   "T_StonePaver_D": {
-   "path": "assets/textures/arena/T_StonePaver_D.webp",
-   "bytes": 79992,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_StonePaver_D.png",
+   "bytes": 4871677,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "srgb",
    "kind": "color",
    "channels": {
     "rgb": "colour (sRGB)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_StonePaver_D.png",
    "sourceSize": [
     2048,
@@ -4338,17 +4338,17 @@
    "notes": "MI_Tile_Era2 top, one slab over the 0-1 UV of SM_ArenaTile slot Top."
   },
   "T_StonePaver_H": {
-   "path": "assets/textures/arena/T_StonePaver_H.webp",
-   "bytes": 50638,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_StonePaver_H.png",
+   "bytes": 5926693,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "height",
    "channels": {
     "r=g=b": "height 0..1 (8-bit from the 16-bit source) (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 16-bit PNG",
    "source": "Art/Textures/Arena/T_StonePaver_H.png",
    "sourceSize": [
     2048,
@@ -4356,17 +4356,17 @@
    ]
   },
   "T_StonePaver_N": {
-   "path": "assets/textures/arena/T_StonePaver_N.webp",
-   "bytes": 1081780,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_StonePaver_N.png",
+   "bytes": 6256105,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "normal",
    "channels": {
     "rgb": "tangent-space normal, OpenGL/glTF convention (+Y = green up; green flipped from the DirectX source); z in b"
    },
    "alpha": false,
-   "encoding": "lossless WebP after 6-bit near-lossless quantisation",
+   "encoding": "full-resolution lossless PNG; green flipped from DirectX source",
    "source": "Art/Textures/Arena/T_StonePaver_N.png",
    "sourceSize": [
     2048,
@@ -4374,17 +4374,17 @@
    ]
   },
   "T_StonePaver_R": {
-   "path": "assets/textures/arena/T_StonePaver_R.webp",
-   "bytes": 35340,
-   "width": 1024,
-   "height": 1024,
+   "path": "assets/textures/arena/T_StonePaver_R.png",
+   "bytes": 1962644,
+   "width": 2048,
+   "height": 2048,
    "colorSpace": "linear",
    "kind": "roughness",
    "channels": {
     "r=g=b": "roughness 0..1 (greyscale; sample .r or .g)"
    },
    "alpha": false,
-   "encoding": "lossy WebP q85",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_StonePaver_R.png",
    "sourceSize": [
     2048,
@@ -4392,8 +4392,8 @@
    ]
   },
   "T_SynthSun": {
-   "path": "assets/textures/arena/T_SynthSun.webp",
-   "bytes": 39796,
+   "path": "assets/textures/arena/T_SynthSun.png",
+   "bytes": 192698,
    "width": 1024,
    "height": 1024,
    "colorSpace": "srgb",
@@ -4403,7 +4403,7 @@
     "a": "coverage (linear)"
    },
    "alpha": true,
-   "encoding": "lossy WebP q85 + lossless alpha",
+   "encoding": "original 8-bit PNG",
    "source": "Art/Textures/Arena/T_SynthSun.png",
    "sourceSize": [
     1024,
@@ -4796,15 +4796,15 @@
   }
  },
  "bytesByCategory": {
-  "models": 11996816,
-  "textures": 21842896,
+  "models": 17338911,
+  "textures": 147122238,
   "audio": 3740688,
-  "fonts": 189286
+  "fonts": 189281
  },
- "totalBytes": 37769686,
+ "totalBytes": 168391118,
  "budget": {
   "targetBytes": 40000000,
-  "withinBudget": true,
-  "note": "totalBytes = every file under Web/public/assets except manifest.json itself (incl. font licences)"
+  "withinBudget": false,
+  "note": "Standalone iOS bundle uses original desktop arena PNGs; the website's 40 MB target does not apply. Counts include model LOD files and the LOD index."
  }
 }

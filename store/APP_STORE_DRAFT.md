@@ -4,26 +4,26 @@
 - **Primary language:** English (U.S.)
 - **Platform:** iPhone only
 - **Category:** Games / Casual, Action
-- **Subtitle:** Classic snake on a 3D phone
+- **Subtitle:** Snake across three voxel worlds
 - **Description:**
 
-  Play Classic Snake on the glowing LCD of a 3D retro phone. Swipe to steer, collect food, and keep your run alive as the pace builds.
+  Play Snake in a richly modeled 3D arena. Swipe to steer, collect food, and survive as the pace builds.
 
-  The phone and its screen are the game. Play on the LCD, use the phone menu to choose a level or maze, and try to earn a place on the local top scores list.
+  Begin on a glowing monochrome grid, then reach the present-day island and neon future through portals earned during play. Each world changes the arena's materials, lighting, and atmosphere while your run continues.
 
   Voxel Snake is built for focused, offline play. The game and its assets are included with the app, and your scores and settings stay on your iPhone.
 
-- **Keywords:** snake,arcade,offline,score,nostalgia,maze,retro
+- **Keywords:** snake,voxel,arcade,offline,3d,neon,retro
 - **In-app purchases / ads / accounts:** None implemented.
 - **Age rating:** Apple's completed questionnaire calculated 4+ in App Store Connect.
 - **Support page:** `store/site/support.html` uses the approved contact `pai@scaffolde.ai`. The verified live URL is `https://scaffolde.ai/retrosnake-classic/support.html`.
 - **Privacy page:** `store/site/privacy.html` matches the signed build's data practices. The verified live URL, `https://scaffolde.ai/retrosnake-classic/privacy.html`, is saved in App Store Connect.
-- **App Review notes:** No sign-in is required. The app opens on the 3D phone. Tap to start Classic LCD Snake, swipe to steer, and tap C twice to reach the phone menu. All assets are bundled for offline play.
-- **Screenshots:** `store/screenshots/iphone-6.5-menu.png` and `store/screenshots/iphone-6.5-gameplay.png` are unedited 1284 × 2778 captures from the iPhone 14 Plus simulator running the standalone app. Both are uploaded to the 6.5-inch iPhone slot; the browser QA screenshot is evidence, not store artwork.
+- **App Review notes:** No sign-in is required. The app opens directly into the 3D voxel arena. Tap to start, swipe to steer, collect food, and enter era portals to travel from the monochrome grid to the island and neon future. The pause button offers an End Run action; Play Again starts a new run. All assets are bundled for offline play.
+- **Screenshots:** The currently uploaded 6.5-inch iPhone screenshots show the former Classic LCD build and must be replaced with genuine Simulator captures of the arena before updating the App Review version. Browser QA images are evidence, not store artwork.
 - **Price and availability:** Free and available on app release in all 175 App Store countries or regions; both settings are saved.
 - **Copyright and contact phone:** `2026 Scaffolde` is saved as the principal's chosen rights holder. The reachable App Review phone number is saved.
 
-App Store Connect has an iOS app record for **Voxel Snake** (Apple ID `6815825906`) under Gary Noonan's active team, using bundle ID `ai.scaffolde.retrosnakeclassic`. The original proposed name, **RetroSnake Classic**, was unavailable. The 1.0 description, keywords, live support/privacy URLs, copyright, review details, manual release choice, age rating, Free price, and both screenshots are saved. The **Data Not Collected** App Privacy responses are published. The account's EU trader declaration is saved as non-trader and shows Active. An Apple Distribution certificate and the `Voxel Snake App Store` profile are installed on this Mac. Build 3's signed arm64 archive passed verification, exported, and uploaded successfully. App Store Connect completed processing version 1.0 (build 3); the **Voxel Snake Internal** group shows it **Testing**, with Retina visual and performance checks saved in "What to Test." Gary installed build 1 on an iPhone 16 Pro and reported severe blur; build 3 awaits his assessment. Build 2 is unassigned. Build 1 remains attached to App Review submission `bc7fde0c-c63c-471b-9437-f124de797094`, **Waiting for Review** as of 2026-09-24; manual public release remains pending approval.
+App Store Connect has an iOS app record for **Voxel Snake** (Apple ID `6815825906`) under Gary Noonan's active team, using bundle ID `ai.scaffolde.retrosnakeclassic`. The saved 1.0 description, review notes, and screenshots still depict the former Classic LCD build. This file is the revised arena listing draft; those saved fields must be replaced and read back after TestFlight acceptance. The live support page also requires an arena update. The **Data Not Collected** App Privacy responses are published; Free price, worldwide availability, copyright, and non-trader DSA declaration are saved. Build 3's signed Classic LCD archive is Testing internally. Build 1 remains attached to App Review submission `bc7fde0c-c63c-471b-9437-f124de797094`, **Waiting for Review** as of 2026-09-24; manual public release remains pending approval.
 
 ## Available skills
 

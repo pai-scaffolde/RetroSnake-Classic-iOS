@@ -31,7 +31,8 @@ export class Models {
     this.detail = detail;
     this.loader.setMeshoptDecoder(MeshoptDecoder);
     this.index = fetch(assets.baseUrl + 'assets/models/lod/index.json')
-      .then((r) => (r.ok ? (r.json() as Promise<LodIndex>) : {}))
+      // WKURLSchemeHandler responses have status 0 despite delivering the JSON.
+      .then((r) => (r.ok || r.status === 0 ? (r.json() as Promise<LodIndex>) : {}))
       .catch(() => ({}));
   }
 
